@@ -6,20 +6,18 @@ import TextButton from '../../../components/TextButton';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
 
-const SignInScreen = (props) => {
+const SignUpScreen = (props) => {
+	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-
-	const handleSignIn = () => {
-		console.log('Should Do Sign In');
-	};
-
-	const handleForgotPassword = () => {
-		console.log('Should Go To Forgot Password');
-	};
+	const [passwordConfirm, setPasswordConfirm] = useState('');
 
 	const handleSignUp = () => {
-		console.log('Should Go To Sign Up');
+		console.log('Should Do Sign Up');
+	};
+
+	const handleSignIn = () => {
+		console.log('Should Go To Sign In');
 	};
 
 	const {
@@ -41,7 +39,7 @@ const SignInScreen = (props) => {
 				<View style={titleContainer}>
 					<View style={titlePadding}>
 						<Text numberOfLines={2} style={titleText}>
-							Welcome Back
+							Create Account
 						</Text>
 					</View>
 				</View>
@@ -50,7 +48,12 @@ const SignInScreen = (props) => {
 						<InputForm
 							fields={[
 								{
-									placeholder: 'Email',
+									placeholder: 'Your name',
+									value: name,
+									onChangeText: (text) => setName(text),
+								},
+								{
+									placeholder: 'Your email',
 									value: email,
 									onChangeText: (text) => setEmail(text),
 								},
@@ -59,13 +62,13 @@ const SignInScreen = (props) => {
 									value: password,
 									onChangeText: (text) => setPassword(text),
 									secureTextEntry: true,
-									rightComponent: () => (
-										<TextButton
-											title='Forgot?'
-											titleColor={Colors.primaryColor}
-											onPress={handleForgotPassword}
-										/>
-									),
+								},
+								{
+									placeholder: 'Confirm Password',
+									value: passwordConfirm,
+									onChangeText: (text) =>
+										setPasswordConfirm(text),
+									secureTextEntry: true,
 								},
 							]}
 						/>
@@ -74,20 +77,20 @@ const SignInScreen = (props) => {
 						<RoundedButton
 							width='100%'
 							height={60}
-							title='Sign in'
+							title='Sign up'
 							titleColor='#fff'
-							onPress={handleSignIn}
+							onPress={handleSignUp}
 							borderRadius={30}
 							backgroundColor={Colors.primaryColor}
 						/>
 					</View>
 					<View style={bodyFooterContainer}>
-						<Text>Create account? </Text>
+						<Text>Back to </Text>
 						<TextButton
-							title='Sign up'
+							title='Sign in'
 							titleColor={Colors.primaryColor}
 							titleWeight='bold'
-							onPress={handleSignUp}
+							onPress={handleSignIn}
 						/>
 					</View>
 				</View>
@@ -96,4 +99,4 @@ const SignInScreen = (props) => {
 	);
 };
 
-export default SignInScreen;
+export default SignUpScreen;

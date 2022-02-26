@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	inputFormContainer: {
-		flex: 1,
+		flex: 2,
 	},
 	buttonContainer: {
 		flex: 1,
