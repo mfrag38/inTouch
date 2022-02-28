@@ -7,15 +7,10 @@ import Colors from '../../../constants/Colors';
 import { styles } from './style';
 
 const SignInScreen = (props) => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [mobileNumber, setMobileNumber] = useState('');
 
 	const handleSignIn = () => {
 		console.log('Should Do Sign In');
-	};
-
-	const handleForgotPassword = () => {
-		console.log('Should Go To Forgot Password');
 	};
 
 	const handleSignUp = () => {
@@ -32,6 +27,7 @@ const SignInScreen = (props) => {
 		inputFormContainer,
 		buttonContainer,
 		bodyFooterContainer,
+		bodyFooterText,
 	} = styles;
 
 	return (
@@ -50,22 +46,13 @@ const SignInScreen = (props) => {
 						<InputForm
 							fields={[
 								{
-									placeholder: 'Email',
-									value: email,
-									onChangeText: (text) => setEmail(text),
-								},
-								{
-									placeholder: 'Password',
-									value: password,
-									onChangeText: (text) => setPassword(text),
-									secureTextEntry: true,
-									rightComponent: () => (
-										<TextButton
-											title='Forgot?'
-											titleColor={Colors.primaryColor}
-											onPress={handleForgotPassword}
-										/>
-									),
+									placeholder: 'Mobile Number',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: mobileNumber,
+									onChangeText: (text) =>
+										setMobileNumber(text),
+									keyboardType: 'phone-pad',
 								},
 							]}
 						/>
@@ -78,14 +65,14 @@ const SignInScreen = (props) => {
 							titleColor='#fff'
 							onPress={handleSignIn}
 							borderRadius={30}
-							backgroundColor={Colors.primaryColor}
+							backgroundColor={Colors.PrimaryColor}
 						/>
 					</View>
 					<View style={bodyFooterContainer}>
-						<Text>Create account? </Text>
+						<Text style={bodyFooterText}>Create account? </Text>
 						<TextButton
 							title='Sign up'
-							titleColor={Colors.primaryColor}
+							titleColor={Colors.PrimaryColor}
 							titleWeight='bold'
 							onPress={handleSignUp}
 						/>

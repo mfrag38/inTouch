@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingHorizontal: 32,
-		backgroundColor: Colors.backgroundColor,
+		backgroundColor: Colors.BackgroundColor,
 	},
 	topSpacer: { flex: 0.5 },
 	titleContainer: {
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
 	titleText: {
 		fontSize: 35,
 		flexWrap: 'wrap',
-		color: Colors.primaryColor,
+		color: Colors.PrimaryColor,
 	},
 	bodyContainer: {
 		flex: 2.5,
@@ -43,4 +43,5 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},
+	bodyFooterText: { color: Colors.White },
 });

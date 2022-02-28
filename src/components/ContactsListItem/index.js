@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../constants/Colors';
 import { styles } from './style';
 
-const SectionListItem = (props) => {
+const ContactsListItem = (props) => {
 	const { item } = props;
 
 	const {
@@ -34,11 +34,15 @@ const SectionListItem = (props) => {
 						item.contactSelected ? 'check-circle' : 'circle-outline'
 					}
 					size={24}
-					color={Colors.SecondaryColor}
+					color={
+						item.contactSelected
+							? Colors.SecondaryColor
+							: Colors.Gray
+					}
 				/>
 			</View>
 		</View>
 	);
 };
 
-export default SectionListItem;
+export default ContactsListItem;

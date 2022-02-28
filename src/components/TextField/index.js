@@ -8,10 +8,13 @@ const TextField = (props) => {
 
 	const {
 		placeholder,
+		placeholderColor,
+		textColor,
 		value,
 		onChangeText,
 		secureTextEntry,
 		rightComponent,
+		keyboardType,
 	} = props;
 
 	const { container } = styles;
@@ -22,8 +25,8 @@ const TextField = (props) => {
 				container,
 				{
 					borderBottomColor: isFocused
-						? Colors.primaryColor
-						: Colors.accentColor,
+						? Colors.PrimaryColor
+						: Colors.AccentColor,
 				},
 			]}
 		>
@@ -31,11 +34,14 @@ const TextField = (props) => {
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
 				placeholder={placeholder}
+				placeholderTextColor={placeholderColor}
 				value={value}
 				onChangeText={onChangeText}
 				secureTextEntry={secureTextEntry}
+				keyboardType={keyboardType}
 				style={{
 					flex: 1,
+					color: textColor,
 				}}
 			/>
 			{rightComponent ? rightComponent() : null}

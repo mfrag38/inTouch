@@ -1,8 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import TextField from '../TextField';
-import TextButton from '../TextButton';
-import Colors from '../../constants/Colors';
 import { styles } from './style';
 
 const InputForm = (props) => {

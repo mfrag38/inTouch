@@ -1,10 +1,8 @@
 import React from 'react';
-import { View, Text, SectionList, TextInput, FlatList } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import SectionListItem from '../../components/SectionListItem';
-import SectionListItemSeparator from '../../components/SectionListItemSeparator';
-import SectionListSectionHeader from '../../components/SectionListSectionHeader';
-import SelectionItem from '../../components/SelectionItem';
+import ContactsList from '../../components/ContactsList';
+import SelectionList from '../../components/SelectionList';
 import Colors from '../../constants/Colors';
 import { groupArrayBy } from '../../utils/arrayOperations';
 import Contacts from './Contacts';
@@ -35,10 +33,34 @@ const selectedContacts = [
 		contactIcon: 'D',
 		contactSelected: true,
 	},
+	{
+		contactName: 'Adeline Dudley',
+		contactStatus: 'minim est aliquip veniam proident qui',
+		contactIcon: 'A',
+		contactSelected: true,
+	},
+	{
+		contactName: 'Bertie Edwards',
+		contactStatus: 'quis labore excepteur nulla aute nulla',
+		contactIcon: 'B',
+		contactSelected: true,
+	},
+	{
+		contactName: 'Cannon Harrell',
+		contactStatus: 'minim est adipisicing nulla et laborum',
+		contactIcon: 'C',
+		contactSelected: true,
+	},
+	{
+		contactName: 'Danielle Oneal',
+		contactStatus: 'dolor laboris adipisicing minim minim cillum',
+		contactIcon: 'D',
+		contactSelected: true,
+	},
 ];
 
-const ContactsScreen = (props) => {
-	const dataGetter = () => {
+const AddParticipantsScreen = (props) => {
+	/* const dataGetter = () => {
 		var returnData = [];
 		const ff = groupArrayBy(Contacts, 'contactIcon');
 		// console.log('FF:', ff);
@@ -51,13 +73,12 @@ const ContactsScreen = (props) => {
 		// );
 		// console.log('The FF:', ff);
 		return ff;
-	};
+	}; */
 
 	const {
 		container,
 		headerContainer,
 		headerTopContainer,
-		// headerButtonContainer,
 		headerButtonText,
 		headerTitlesContainer,
 		headerTitleText,
@@ -102,42 +123,16 @@ const ContactsScreen = (props) => {
 			</View>
 			{selectedContacts.length !== 0 ? (
 				<View style={selectionAreaContainer}>
-					<FlatList
-						data={selectedContacts}
-						keyExtractor={(item, index) => item + index}
-						horizontal={true}
-						renderItem={({ item }) => <SelectionItem item={item} />}
-						ItemSeparatorComponent={() => (
-							<View
-								style={{
-									width: 16,
-								}}
-							/>
-						)}
-						showsHorizontalScrollIndicator={false}
-						contentContainerStyle={{
-							flexGrow: 1,
-						}}
-					/>
+					<SelectionList selectedContacts={selectedContacts} />
 				</View>
 			) : null}
 			<View style={bodyContainer}>
-				<SectionList
-					sections={dataGetter()}
-					keyExtractor={(item, index) => item + index}
-					renderItem={({ item }) => <SectionListItem item={item} />}
-					stickySectionHeadersEnabled={true}
-					renderSectionHeader={({ section: { title } }) => (
-						<SectionListSectionHeader title={title} />
-					)}
-					ItemSeparatorComponent={() => <SectionListItemSeparator />}
-					contentContainerStyle={{
-						flexGrow: 1,
-					}}
+				<ContactsList
+					contacts={groupArrayBy(Contacts, 'contactIcon')}
 				/>
 			</View>
 		</View>
 	);
 };
 
-export default ContactsScreen;
+export default AddParticipantsScreen;
