@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-	// headerButtonContainer,
 	headerButtonText: {
 		fontSize: 18,
 		color: Colors.SecondaryColor,
@@ -61,7 +60,6 @@ export const styles = StyleSheet.create({
 	},
 	selectionAreaContainer: {
 		width: '100%',
-		marginVertical: 8,
 	},
 	bodyContainer: {
 		width: '100%',

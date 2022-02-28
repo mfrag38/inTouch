@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { styles } from './style';
 
-const SectionListSectionHeader = (props) => {
+const ContactsListSectionHeader = (props) => {
 	const { title } = props;
 
 	const { headerContainer, headerText } = styles;
@@ -14,4 +14,4 @@ const SectionListSectionHeader = (props) => {
 	);
 };
 
-export default SectionListSectionHeader;
+export default ContactsListSectionHeader;

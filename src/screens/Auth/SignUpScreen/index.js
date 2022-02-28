@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
 import TextButton from '../../../components/TextButton';
@@ -8,9 +9,7 @@ import { styles } from './style';
 
 const SignUpScreen = (props) => {
 	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [passwordConfirm, setPasswordConfirm] = useState('');
+	const [mobileNumber, setMobileNumber] = useState('');
 
 	const handleSignUp = () => {
 		console.log('Should Do Sign Up');
@@ -22,6 +21,7 @@ const SignUpScreen = (props) => {
 
 	const {
 		container,
+		backButtonContainer,
 		topSpacer,
 		titleContainer,
 		titlePadding,
@@ -30,11 +30,19 @@ const SignUpScreen = (props) => {
 		inputFormContainer,
 		buttonContainer,
 		bodyFooterContainer,
+		bodyFooterText,
 	} = styles;
 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 			<View style={container}>
+				<View style={backButtonContainer}>
+					<Icon
+						name='chevron-left'
+						size={36}
+						color={Colors.PrimaryColor}
+					/>
+				</View>
 				<View style={topSpacer} />
 				<View style={titleContainer}>
 					<View style={titlePadding}>
@@ -49,26 +57,19 @@ const SignUpScreen = (props) => {
 							fields={[
 								{
 									placeholder: 'Your name',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
 									value: name,
 									onChangeText: (text) => setName(text),
 								},
 								{
-									placeholder: 'Your email',
-									value: email,
-									onChangeText: (text) => setEmail(text),
-								},
-								{
-									placeholder: 'Password',
-									value: password,
-									onChangeText: (text) => setPassword(text),
-									secureTextEntry: true,
-								},
-								{
-									placeholder: 'Confirm Password',
-									value: passwordConfirm,
+									placeholder: 'Mobile Number',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: mobileNumber,
 									onChangeText: (text) =>
-										setPasswordConfirm(text),
-									secureTextEntry: true,
+										setMobileNumber(text),
+									keyboardType: 'phone-pad',
 								},
 							]}
 						/>
@@ -81,14 +82,14 @@ const SignUpScreen = (props) => {
 							titleColor='#fff'
 							onPress={handleSignUp}
 							borderRadius={30}
-							backgroundColor={Colors.primaryColor}
+							backgroundColor={Colors.PrimaryColor}
 						/>
 					</View>
 					<View style={bodyFooterContainer}>
-						<Text>Back to </Text>
+						<Text style={bodyFooterText}>Back to </Text>
 						<TextButton
 							title='Sign in'
-							titleColor={Colors.primaryColor}
+							titleColor={Colors.PrimaryColor}
 							titleWeight='bold'
 							onPress={handleSignIn}
 						/>

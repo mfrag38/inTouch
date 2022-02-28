@@ -1,6 +1,8 @@
 export default {
-	PrimaryColor: '#00552E',
-	SecondaryColor: '#1D87C9',
+	PrimaryColor: '#1D87C9',
+	PrimaryAccentColor: '#79FAC5',
+	SecondaryColor: '#008A5D',
+	SecondaryAccentColor: '#39C08F',
 	AccentColor: '#DFEAE4',
 	BackgroundColor: '#252026',
 	SectionBackgroundColor: '#3F3A40',
@@ -164,6 +166,7 @@ export default {
 	SlateGrey: '#708090',
 	SlateGreyOpacity: '#70809078',
 	Snow: '#FFFAFA',
+	SoftGray: '#9A959B',
 	SpringGreen: '#00FF7F',
 	SteelBlue: '#4682B4',
 	Tan: '#D2B48C',

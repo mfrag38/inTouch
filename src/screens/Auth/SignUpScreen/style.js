@@ -8,7 +8,16 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingHorizontal: 32,
-		backgroundColor: Colors.backgroundColor,
+		backgroundColor: Colors.BackgroundColor,
+	},
+	backButtonContainer: {
+		width: 56,
+		height: 56,
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'absolute',
+		top: 0,
+		left: 0,
 	},
 	topSpacer: { flex: 0.5 },
 	titleContainer: {
@@ -24,7 +33,7 @@ export const styles = StyleSheet.create({
 	titleText: {
 		fontSize: 35,
 		flexWrap: 'wrap',
-		color: Colors.primaryColor,
+		color: Colors.PrimaryColor,
 	},
 	bodyContainer: {
 		flex: 2.5,
@@ -43,4 +52,5 @@ export const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},
+	bodyFooterText: { color: Colors.White },
 });
