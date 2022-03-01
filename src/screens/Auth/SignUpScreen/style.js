@@ -19,6 +19,14 @@ export const styles = StyleSheet.create({
 		top: 0,
 		left: 0,
 	},
+	backButton: {
+		width: 48,
+		height: 48,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 56,
+		overflow: 'hidden',
+	},
 	topSpacer: { flex: 0.5 },
 	titleContainer: {
 		flex: 1,

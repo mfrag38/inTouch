@@ -12,7 +12,7 @@ const SignInScreen = (props) => {
 	const [password, setPassword] = useState('');
 
 	const handleSignIn = () => {
-		console.log('Should Do Sign In');
+		props.route.params.signInHandler();
 	};
 
 	const handleForgotPassword = () => {
@@ -20,7 +20,9 @@ const SignInScreen = (props) => {
 	};
 
 	const handleSignUp = () => {
-		console.log('Should Go To Sign Up');
+		props.navigation.navigate('SignUp', {
+			signUpHandler: props.route.params.signInHandler,
+		});
 	};
 
 	const {

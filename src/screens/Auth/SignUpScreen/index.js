@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import {
+	View,
+	Text,
+	TouchableWithoutFeedback,
+	TouchableHighlight,
+	Keyboard,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
@@ -15,16 +21,17 @@ const SignUpScreen = (props) => {
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 
 	const handleSignUp = () => {
-		console.log('Should Do Sign Up');
+		props.route.params.signUpHandler();
 	};
 
 	const handleSignIn = () => {
-		console.log('Should Go To Sign In');
+		props.navigation.goBack();
 	};
 
 	const {
 		container,
 		backButtonContainer,
+		backButton,
 		topSpacer,
 		titleContainer,
 		titlePadding,
@@ -42,11 +49,17 @@ const SignUpScreen = (props) => {
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 			<View style={container}>
 				<View style={backButtonContainer}>
-					<Icon
-						name='chevron-left'
-						size={36}
-						color={Colors.PrimaryColor}
-					/>
+					<TouchableHighlight
+						style={backButton}
+						underlayColor={Colors.DimGrayOpacity}
+						onPress={() => props.navigation.goBack()}
+					>
+						<Icon
+							name='chevron-left'
+							size={36}
+							color={Colors.PrimaryColor}
+						/>
+					</TouchableHighlight>
 				</View>
 				<View style={topSpacer} />
 				<View style={titleContainer}>

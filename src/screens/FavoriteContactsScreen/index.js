@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ContactsList from '../../components/ContactsList';
 import { groupArrayBy } from '../../utils/arrayOperations';
@@ -125,6 +125,7 @@ const FavoriteContactsScreen = (props) => {
 		container,
 		headerContainer,
 		backButtonContainer,
+		backButton,
 		headerTitleContainer,
 		headerTitleText,
 		bodyContainer,
@@ -134,11 +135,17 @@ const FavoriteContactsScreen = (props) => {
 		<View style={container}>
 			<View style={headerContainer}>
 				<View style={backButtonContainer}>
-					<Icon
-						name='chevron-left'
-						size={36}
-						color={Colors.PrimaryColor}
-					/>
+					<TouchableHighlight
+						style={backButton}
+						underlayColor={Colors.DimGrayOpacity}
+						onPress={() => props.navigation.goBack()}
+					>
+						<Icon
+							name='chevron-left'
+							size={36}
+							color={Colors.PrimaryColor}
+						/>
+					</TouchableHighlight>
 				</View>
 				<View style={headerTitleContainer}>
 					<Text style={headerTitleText}>Favorite Contacts</Text>
