@@ -32,9 +32,7 @@ const SignInScreen = (props) => {
 	};
 
 	const handleSignUp = () => {
-		props.navigation.navigate('SignUp', {
-			signUpHandler: props.route.params.signInHandler,
-		});
+		props.navigation.navigate('SignUp');
 	};
 
 	const {

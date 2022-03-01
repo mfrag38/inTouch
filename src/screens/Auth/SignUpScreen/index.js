@@ -7,6 +7,7 @@ import {
 	Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import auth from '@react-native-firebase/auth';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
 import TextButton from '../../../components/TextButton';
