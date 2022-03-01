@@ -5,7 +5,7 @@ export default {
 	SecondaryAccentColor: '#39C08F',
 	AccentColor: '#DFEAE4',
 	BackgroundColor: '#252026',
-	SectionBackgroundColor: '#3F3A40',
+	SectionBackgroundColor: '#696969',
 	HeaderBackgroundColor: '#3C373D',
 	SearchBarBackgroundColor: '#4F4A50',
 	AliceBlue: '#F0F8FF',
