@@ -1,19 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
 import TextField from '../TextField';
-import { styles } from './style';
 
 const InputForm = (props) => {
-	const { fields } = props;
-
-	const { container, textInputContainer } = styles;
+	const { fields, containerStyle, textFieldStyle } = props;
 
 	return (
-		<View style={container}>
+		<View style={containerStyle}>
 			{fields.map((field, index) => (
 				<View
 					key={`${field.placeholder}-${index}`}
-					style={textInputContainer}
+					style={textFieldStyle}
 				>
 					<TextField {...field} />
 				</View>

@@ -43,6 +43,12 @@ export const styles = StyleSheet.create({
 	inputFormContainer: {
 		flex: 2,
 	},
+	formContainerStyle: {
+		flex: 1,
+	},
+	formTextFieldStyle: {
+		flex: 1,
+	},
 	buttonContainer: {
 		flex: 1,
 		justifyContent: 'center',
