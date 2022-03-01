@@ -38,6 +38,8 @@ const SignUpScreen = (props) => {
 		titleText,
 		bodyContainer,
 		inputFormContainer,
+		formContainerStyle,
+		formTextFieldStyle,
 		buttonContainer,
 		bodyFooterContainer,
 		bodyFooterText,
@@ -70,6 +72,8 @@ const SignUpScreen = (props) => {
 				<View style={bodyContainer}>
 					<View style={inputFormContainer}>
 						<InputForm
+							containerStyle={formContainerStyle}
+							textFieldStyle={formTextFieldStyle}
 							fields={[
 								{
 									placeholder: 'Your name',

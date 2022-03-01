@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colors from '../../constants/Colors';
+import Colors from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
 	container: {
@@ -26,14 +26,6 @@ export const styles = StyleSheet.create({
 		position: 'absolute',
 		left: 0,
 	},
-	backButton: {
-		width: 48,
-		height: 48,
-		justifyContent: 'center',
-		alignItems: 'center',
-		borderRadius: 56,
-		overflow: 'hidden',
-	},
 	headerTitleContainer: {
 		height: '100%',
 		justifyContent: 'center',
@@ -46,6 +38,27 @@ export const styles = StyleSheet.create({
 	},
 	bodyContainer: {
 		width: '100%',
+		flex: 1,
+		paddingHorizontal: 16,
+	},
+	inputFormContainer: {
+		flex: 1.5,
+	},
+	formContainerStyle: {
+		flex: 1,
+	},
+	formTextFieldStyle: {
+		flex: 1,
+		justifyContent: 'center',
+	},
+	spacer: {
+		flex: 2,
+	},
+	buttonContainer: {
+		flex: 1,
+		justifyContent: 'center',
+	},
+	bottomSpacer: {
 		flex: 1,
 	},
 });
