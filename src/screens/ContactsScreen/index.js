@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ContactsList from '../../components/ContactsList';
 import SelectionList from '../../components/SelectionList';
@@ -79,7 +79,8 @@ const ContactsScreen = (props) => {
 		container,
 		headerContainer,
 		headerTopContainer,
-		headerButtonText,
+		headerActionContainer,
+		headerActionButton,
 		headerTitlesContainer,
 		headerTitleText,
 		headerSubTitleText,
@@ -94,19 +95,39 @@ const ContactsScreen = (props) => {
 		<View style={container}>
 			<View style={headerContainer}>
 				<View style={headerTopContainer}>
-					<View />
+					<View style={headerActionContainer}>
+						<TouchableHighlight
+							style={headerActionButton}
+							underlayColor={Colors.DimGrayOpacity}
+							onPress={() => props.route.params.signOutHandler()}
+						>
+							<Icon
+								name='logout'
+								size={30}
+								color={Colors.SecondaryColor}
+							/>
+						</TouchableHighlight>
+					</View>
 					<View style={headerTitlesContainer}>
 						<Text style={headerTitleText}>Contacts</Text>
 						<Text style={headerSubTitleText}>
 							0 / {Contacts.length}
 						</Text>
 					</View>
-					<View>
-						<Icon
-							name='account-star'
-							size={30}
-							color={Colors.SecondaryColor}
-						/>
+					<View style={headerActionContainer}>
+						<TouchableHighlight
+							style={headerActionButton}
+							underlayColor={Colors.DimGrayOpacity}
+							onPress={() =>
+								props.navigation.navigate('FavoriteContacts')
+							}
+						>
+							<Icon
+								name='account-star'
+								size={30}
+								color={Colors.SecondaryColor}
+							/>
+						</TouchableHighlight>
 					</View>
 				</View>
 				<View style={headerBottomContainer}>

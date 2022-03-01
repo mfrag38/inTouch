@@ -2,10 +2,10 @@ import React from 'react';
 import SignInScreen from './screens/Auth/SignInScreen';
 import SignUpScreen from './screens/Auth/SignUpScreen';
 import ContactsScreen from './screens/ContactsScreen';
-import FavoriteContactsScreen from './screens/FavoriteContactsScreen';
+import RootNavigator from './navigation/RootNavigator';
 
 const App = () => {
-	return <FavoriteContactsScreen />;
+	return <RootNavigator />;
 	// return <ContactsScreen />;
 	// return <SignUpScreen />;
 	// return <SignInScreen />;
