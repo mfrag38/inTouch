@@ -59,7 +59,7 @@ const selectedContacts = [
 	},
 ];
 
-const AddParticipantsScreen = (props) => {
+const ContactsScreen = (props) => {
 	/* const dataGetter = () => {
 		var returnData = [];
 		const ff = groupArrayBy(Contacts, 'contactIcon');
@@ -94,18 +94,19 @@ const AddParticipantsScreen = (props) => {
 		<View style={container}>
 			<View style={headerContainer}>
 				<View style={headerTopContainer}>
-					{/* The Below View Should Be Replaced By Some Sort Of Touchable */}
-					<View>
-						<Text style={headerButtonText}>Back</Text>
-					</View>
+					<View />
 					<View style={headerTitlesContainer}>
-						<Text style={headerTitleText}>Add Participants</Text>
+						<Text style={headerTitleText}>Contacts</Text>
 						<Text style={headerSubTitleText}>
 							0 / {Contacts.length}
 						</Text>
 					</View>
 					<View>
-						<Text style={headerButtonText}>Next</Text>
+						<Icon
+							name='account-star'
+							size={30}
+							color={Colors.SecondaryColor}
+						/>
 					</View>
 				</View>
 				<View style={headerBottomContainer}>
@@ -135,4 +136,4 @@ const AddParticipantsScreen = (props) => {
 	);
 };
 
-export default AddParticipantsScreen;
+export default ContactsScreen;

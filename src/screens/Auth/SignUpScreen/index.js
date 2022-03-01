@@ -9,7 +9,10 @@ import { styles } from './style';
 
 const SignUpScreen = (props) => {
 	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
 	const [mobileNumber, setMobileNumber] = useState('');
+	const [password, setPassword] = useState('');
+	const [passwordConfirm, setPasswordConfirm] = useState('');
 
 	const handleSignUp = () => {
 		console.log('Should Do Sign Up');
@@ -63,13 +66,38 @@ const SignUpScreen = (props) => {
 									onChangeText: (text) => setName(text),
 								},
 								{
-									placeholder: 'Mobile Number',
+									placeholder: 'Your email',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: email,
+									keyboardType: 'email-address',
+									onChangeText: (text) => setEmail(text),
+								},
+								{
+									placeholder: 'Your mobile number',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
 									value: mobileNumber,
+									keyboardType: 'phone-pad',
 									onChangeText: (text) =>
 										setMobileNumber(text),
-									keyboardType: 'phone-pad',
+								},
+								{
+									placeholder: 'Password',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: password,
+									onChangeText: (text) => setPassword(text),
+									secureTextEntry: true,
+								},
+								{
+									placeholder: 'Confirm Password',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: passwordConfirm,
+									onChangeText: (text) =>
+										setPasswordConfirm(text),
+									secureTextEntry: true,
 								},
 							]}
 						/>

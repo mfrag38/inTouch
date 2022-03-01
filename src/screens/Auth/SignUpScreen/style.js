@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
 		color: Colors.PrimaryColor,
 	},
 	bodyContainer: {
-		flex: 2.5,
+		flex: 4,
 		width: '100%',
 		justifyContent: 'center',
 	},
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	bodyFooterContainer: {
-		flex: 1,
+		flex: 0.75,
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},

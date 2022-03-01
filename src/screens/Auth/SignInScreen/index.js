@@ -8,9 +8,15 @@ import { styles } from './style';
 
 const SignInScreen = (props) => {
 	const [mobileNumber, setMobileNumber] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleSignIn = () => {
 		console.log('Should Do Sign In');
+	};
+
+	const handleForgotPassword = () => {
+		console.log('Should Go To Forgot Password');
 	};
 
 	const handleSignUp = () => {
@@ -46,13 +52,27 @@ const SignInScreen = (props) => {
 						<InputForm
 							fields={[
 								{
-									placeholder: 'Mobile Number',
+									placeholder: 'Email',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
-									value: mobileNumber,
-									onChangeText: (text) =>
-										setMobileNumber(text),
-									keyboardType: 'phone-pad',
+									value: email,
+									keyboardType: 'email-address',
+									onChangeText: (text) => setEmail(text),
+								},
+								{
+									placeholder: 'Password',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: password,
+									onChangeText: (text) => setPassword(text),
+									secureTextEntry: true,
+									rightComponent: () => (
+										<TextButton
+											title='Forgot?'
+											titleColor={Colors.PrimaryColor}
+											onPress={handleForgotPassword}
+										/>
+									),
 								},
 							]}
 						/>
