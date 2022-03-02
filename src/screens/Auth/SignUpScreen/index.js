@@ -21,7 +21,9 @@ const SignUpScreen = (props) => {
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 
 	const handleSignUp = () => {
-		props.route.params.signUpHandler();
+		props.navigation.navigate('AdditionalUserInfo', {
+			signUpHandler: props.route.params.signUpHandler,
+		});
 	};
 
 	const handleSignIn = () => {
@@ -75,13 +77,13 @@ const SignUpScreen = (props) => {
 							containerStyle={formContainerStyle}
 							textFieldStyle={formTextFieldStyle}
 							fields={[
-								{
+								/* {
 									placeholder: 'Your name',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
 									value: name,
 									onChangeText: (text) => setName(text),
-								},
+								}, */
 								{
 									placeholder: 'Your email',
 									placeholderColor: Colors.Gray,
@@ -90,7 +92,7 @@ const SignUpScreen = (props) => {
 									keyboardType: 'email-address',
 									onChangeText: (text) => setEmail(text),
 								},
-								{
+								/* {
 									placeholder: 'Your mobile number',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
@@ -98,7 +100,7 @@ const SignUpScreen = (props) => {
 									keyboardType: 'phone-pad',
 									onChangeText: (text) =>
 										setMobileNumber(text),
-								},
+								}, */
 								{
 									placeholder: 'Password',
 									placeholderColor: Colors.Gray,
