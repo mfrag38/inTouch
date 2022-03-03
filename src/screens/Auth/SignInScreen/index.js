@@ -111,9 +111,11 @@ const SignInScreen = (props) => {
 					<View style={bodyFooterContainer}>
 						<Text style={bodyFooterText}>Create account? </Text>
 						<TextButton
+							// title='Close Bottom Sheet'
 							title='Sign up'
 							titleColor={Colors.PrimaryColor}
 							titleWeight='bold'
+							// onPress={onClose}
 							onPress={handleSignUp}
 						/>
 					</View>

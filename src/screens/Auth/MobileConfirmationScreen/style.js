@@ -4,7 +4,8 @@ import Colors from '../../../constants/Colors';
 export const styles = StyleSheet.create({
 	container: {
 		width: '100%',
-		height: '100%',
+		// height: '100%',
+		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingHorizontal: 32,
@@ -16,6 +17,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 		alignSelf: 'flex-start',
+		marginVertical: 16,
 	},
 	titlePadding: {
 		flex: 0.75,

@@ -8,13 +8,13 @@ import AdditionalUserInfoScreen from './screens/Auth/AdditionalUserInfoScreen';
 import MobileConfirmationScreen from './screens/Auth/MobileConfirmationScreen';
 
 const App = () => {
-	return <RootNavigator />;
+	// return <RootNavigator />;
 	// return <MobileConfirmationScreen />;
 	// return <AdditionalUserInfoScreen />;
 	// return <FavoriteContactsScreen />;
 	// return <ContactsScreen />;
 	// return <SignUpScreen />;
-	// return <SignInScreen />;
+	return <SignInScreen />;
 };
 
 export default App;
