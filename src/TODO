@@ -1,2 +1,5 @@
 // TODO: Create User With Email And Password
 // TODO: Implement Login With Mobile Number
+// TODO: Remove Additional User Info Screen And Acquire User Info In One Screen
+         Which Is Sign Up Screen, It's Because We Want To Use Promise.all() To Fire
+         More Than Promise At Once

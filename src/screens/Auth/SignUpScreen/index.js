@@ -5,6 +5,7 @@ import {
 	TouchableWithoutFeedback,
 	TouchableHighlight,
 	Keyboard,
+	Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
@@ -17,14 +18,58 @@ import { styles } from './style';
 const SignUpScreen = (props) => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
-	const [mobileNumber, setMobileNumber] = useState('');
+	const [mobileNumber, setMobileNumber] = useState('01');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 
+	const mobileRegex = /^(\+20|0)|[1][0125][0-9]{8}$/;
+
 	const handleSignUp = () => {
-		props.navigation.navigate('AdditionalUserInfo', {
-			signUpHandler: props.route.params.signUpHandler,
-		});
+		if (mobileNumber.match(mobileRegex)) {
+			console.log('Mobile Regex: True');
+		} else {
+			console.log('Mobile Regex: False');
+		}
+		if (name.length === 0) {
+			Alert.alert('Error', 'Please enter your name.');
+		} else if (email.length === 0) {
+			Alert.alert('Error', 'Please enter your email.');
+		} else if (mobileNumber.length === 0) {
+			Alert.alert('Error', 'Please enter your mobile number.');
+		} else if (password.length === 0) {
+			Alert.alert('Error', 'Please enter your password');
+		} else if (passwordConfirm.length === 0) {
+			Alert.alert('Error', 'Please confirm your password');
+		} else if (password !== passwordConfirm) {
+			Alert.alert(
+				'Error',
+				"Your password doesn't match it's confirmation",
+			);
+		} else {
+			// Loading
+			/* auth()
+			.signInWithPhoneNumber(mobileNumber)
+			.then((confirmation) => {
+				console.log('Confirmation:', confirmation);
+			})
+			.catch((error) => {
+				console.log('Sign Up Error:', error);
+			}); */
+			/* auth()
+				.createUserWithEmailAndPassword(email, password)
+				.then((userCredential) => {
+					console.log('User Credential:', userCredential);
+					Promise.all([
+						auth().currentUser.updateProfile({
+							displayName: name,
+						}),
+						auth().currentUser.updatePhoneNumber(),
+					]).then((values) => {});
+				})
+				.catch((error) => {
+					console.log('Sign Up Error:', error);
+				}); */
+		}
 	};
 
 	const handleSignIn = () => {
@@ -78,13 +123,13 @@ const SignUpScreen = (props) => {
 							containerStyle={formContainerStyle}
 							textFieldStyle={formTextFieldStyle}
 							fields={[
-								/* {
+								{
 									placeholder: 'Your name',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
 									value: name,
 									onChangeText: (text) => setName(text),
-								}, */
+								},
 								{
 									placeholder: 'Your email',
 									placeholderColor: Colors.Gray,
@@ -93,7 +138,7 @@ const SignUpScreen = (props) => {
 									keyboardType: 'email-address',
 									onChangeText: (text) => setEmail(text),
 								},
-								/* {
+								{
 									placeholder: 'Your mobile number',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
@@ -101,7 +146,7 @@ const SignUpScreen = (props) => {
 									keyboardType: 'phone-pad',
 									onChangeText: (text) =>
 										setMobileNumber(text),
-								}, */
+								},
 								{
 									placeholder: 'Password',
 									placeholderColor: Colors.Gray,

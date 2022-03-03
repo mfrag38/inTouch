@@ -1,6 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import BottomSheet from '../../../components/BottomSheet';
+import React, { useState } from 'react';
+import {
+	View,
+	Text,
+	TouchableWithoutFeedback,
+	Keyboard,
+	Alert,
+} from 'react-native';
+import auth from '@react-native-firebase/auth';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
 import TextButton from '../../../components/TextButton';
@@ -10,6 +19,7 @@ import { styles } from './style';
 
 const SignInScreen = (props) => {
 	const modalRef = useRef(null);
+	const mobileRegex = /^(\+201|01|1)[0125][0-9]{8}$/;
 
 	const [mobileNumber, setMobileNumber] = useState('');
 	const [email, setEmail] = useState('');
@@ -25,10 +35,42 @@ const SignInScreen = (props) => {
 
 	const handleSignIn = () => {
 		props.route.params.signInHandler();
+	const [confirm, setConfirm] = useState(null);
+
+	const [code, setCode] = useState('');
+
+	const mobileNumberUnifier = (number) => {
+		if (number.startsWith(1)) {
+			number = '+20' + number;
+		} else if (number.startsWith(0)) {
+			number = '+2' + number;
+		}
+		return number;
 	};
 
-	const handleForgotPassword = () => {
-		console.log('Should Go To Forgot Password');
+	const handleSignIn = async () => {
+		if (mobileNumber.length === 0) {
+			Alert.alert('Error', 'Please enter your mobile number.');
+		} else {
+			if (!mobileNumber.match(mobileRegex)) {
+				Alert.alert('Error', 'Please enter a valid mobile number.');
+			} else {
+				// Loading
+				const confirmation = await auth().signInWithPhoneNumber(
+					mobileNumberUnifier(mobileNumber),
+				);
+				setConfirm(confirmation);
+			}
+		}
+		// props.route.params.signInHandler();
+	};
+
+	const confirmCode = async () => {
+		try {
+			await confirm.confirm(code);
+		} catch (error) {
+			console.log('Confirm Error:', error);
+		}
 	};
 
 	const handleSignUp = () => {
@@ -68,6 +110,22 @@ const SignInScreen = (props) => {
 							textFieldStyle={formTextFieldStyle}
 							fields={[
 								{
+									placeholder: 'Mobile Number',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: mobileNumber,
+									keyboardType: 'phone-pad',
+									onChangeText: (text) =>
+										setMobileNumber(text),
+								},
+								{
+									placeholder: 'Code',
+									placeholderColor: Colors.Gray,
+									textColor: Colors.White,
+									value: code,
+									onChangeText: (text) => setCode(text),
+								},
+								/* {
 									placeholder: 'Email',
 									placeholderColor: Colors.Gray,
 									textColor: Colors.White,
@@ -89,7 +147,7 @@ const SignInScreen = (props) => {
 											onPress={handleForgotPassword}
 										/>
 									),
-								},
+								}, */
 							]}
 						/>
 					</View>
@@ -102,6 +160,15 @@ const SignInScreen = (props) => {
 							titleColor='#fff'
 							// onPress={onOpen}
 							onPress={handleSignIn}
+							borderRadius={30}
+							backgroundColor={Colors.PrimaryColor}
+						/>
+						<RoundedButton
+							width='100%'
+							height={60}
+							title='Confirm Code'
+							titleColor='#fff'
+							onPress={confirmCode}
 							borderRadius={30}
 							backgroundColor={Colors.PrimaryColor}
 						/>
