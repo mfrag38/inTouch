@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import BottomSheet from '../../../components/BottomSheet';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
 import TextButton from '../../../components/TextButton';
 import Colors from '../../../constants/Colors';
+import MobileConfirmationScreen from '../MobileConfirmationScreen';
 import { styles } from './style';
 
 const SignInScreen = (props) => {
+	const modalRef = useRef(null);
+
 	const [mobileNumber, setMobileNumber] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const onOpen = () => {
+		modalRef.current?.open();
+	};
+
+	const onClose = () => {
+		modalRef.current?.close();
+	};
 
 	const handleSignIn = () => {
 		props.route.params.signInHandler();
@@ -87,8 +99,10 @@ const SignInScreen = (props) => {
 						<RoundedButton
 							width='100%'
 							height={60}
+							// title='Open Bottom Sheet'
 							title='Sign in'
 							titleColor='#fff'
+							// onPress={onOpen}
 							onPress={handleSignIn}
 							borderRadius={30}
 							backgroundColor={Colors.PrimaryColor}
@@ -104,6 +118,9 @@ const SignInScreen = (props) => {
 						/>
 					</View>
 				</View>
+				<BottomSheet modalRef={modalRef}>
+					<MobileConfirmationScreen onClose={onClose} />
+				</BottomSheet>
 			</View>
 		</TouchableWithoutFeedback>
 	);
