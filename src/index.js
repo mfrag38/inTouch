@@ -4,11 +4,11 @@ import SignInScreen from './screens/Auth/SignInScreen';
 import ContactsScreen from './screens/ContactsScreen';
 import FavoriteContactsScreen from './screens/FavoriteContactsScreen';
 import AdditionalUserInfoScreen from './screens/Auth/AdditionalUserInfoScreen';
-import MobileConfirmationScreen from './screens/Auth/MobileConfirmationScreen';
+import MobileConfirmationSheet from './screens/Auth/MobileConfirmationSheet';
 
 const App = () => {
 	return <RootNavigator />;
-	// return <MobileConfirmationScreen />;
+	// return <MobileConfirmationSheet />;
 	// return <AdditionalUserInfoScreen />;
 	// return <FavoriteContactsScreen />;
 	// return <ContactsScreen />;
