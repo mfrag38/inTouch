@@ -18,7 +18,7 @@ const TextField = (props) => {
 		keyboardType,
 	} = props;
 
-	const { container } = styles;
+	const { container, textInputStyle } = styles;
 
 	return (
 		<View
@@ -41,11 +41,7 @@ const TextField = (props) => {
 				onChangeText={onChangeText}
 				secureTextEntry={secureTextEntry}
 				keyboardType={keyboardType}
-				// keyboardType='phone-pad'
-				style={{
-					flex: 1,
-					color: textColor,
-				}}
+				style={[textInputStyle, { color: textColor }]}
 			/>
 			{rightComponent ? rightComponent() : null}
 		</View>

@@ -6,11 +6,12 @@ import App from './src';
 import { name as appName } from './app.json';
 
 const Wrapper = () => (
+	// <GestureHandlerRootView>
 	<PortalProvider>
-		<GestureHandlerRootView>
-			<App />
-		</GestureHandlerRootView>
+		<App />
 	</PortalProvider>
+	// </GestureHandlerRootView>
 );
 
-AppRegistry.registerComponent(appName, () => Wrapper);
+// AppRegistry.registerComponent(appName, () => Wrapper);
+AppRegistry.registerComponent(appName, () => App);

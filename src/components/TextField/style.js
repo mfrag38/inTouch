@@ -7,4 +7,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderBottomWidth: 2,
 	},
+	textInputStyle: {
+		flex: 1,
+	},
 });

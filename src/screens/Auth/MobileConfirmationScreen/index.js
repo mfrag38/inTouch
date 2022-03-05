@@ -1,15 +1,109 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import InputForm from '../../../components/InputForm';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Alert } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import RoundedButton from '../../../components/RoundedButton';
 import TextButton from '../../../components/TextButton';
+import mobileNumberUnifier from '../../../utils/mobileNumberUnifier';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
 
 const MobileConfirmationScreen = (props) => {
-	const { onClose } = props;
+	const { onClose, confirm, mobileNumber, signInHandler } = props;
 
+	let timer;
+
+	const [underlineColor, setUnderlineColor] = useState(Colors.AccentColor);
+	const [isResent, setIsResent] = useState(false);
 	const [code, setCode] = useState('');
+	const [count, setCount] = useState(30);
+	const [reconfirm, setReconfirm] = useState(null);
+
+	useEffect(() => {
+		return () => clearTimeout(timer);
+	}, []);
+
+	useEffect(() => {
+		if (isResent === true) {
+			timer = setTimeout(() => {
+				if (count !== 0) {
+					setCount(count - 1);
+				} else {
+					setIsResent(false);
+					clearTimeout(timer);
+				}
+			}, 1000);
+		} else {
+			setCount(30);
+			clearTimeout(timer);
+		}
+	}, [isResent, count]);
+
+	const confirmVerificationCode = () => {
+		if (code.length === 0) {
+			Alert.alert('Error', 'Please type confirmation code');
+		} else {
+			if (reconfirm === null) {
+				confirm
+					.confirm(code)
+					.then((res) => {
+						if (res.additionalUserInfo.isNewUser === true) {
+							onClose();
+							props.navigation.navigate('AdditionalUserInfo', {
+								user: res.user,
+								userId: res.user.uid,
+								signInHandler: signInHandler,
+							});
+						} else {
+							signInHandler();
+						}
+					})
+					.catch((error) => {
+						console.log('Code Verification Error:', error);
+						Alert.alert('Error', 'Invalid Verification Code', [
+							{
+								text: 'OK',
+								onPress: () => setCode(''),
+							},
+						]);
+					});
+			} else {
+				reconfirm
+					.confirm(code)
+					.then((res) => {
+						if (res.additionalUserInfo.isNewUser === true) {
+							onClose();
+							props.navigation.navigate('AdditionalUserInfo', {
+								user: res.user,
+								userId: res.user.uid,
+								signInHandler: signInHandler,
+							});
+						} else {
+							signInHandler();
+						}
+					})
+					.catch((error) => {
+						console.log('Code Verification Error:', error);
+						Alert.alert('Error', 'Invalid Verification Code', [
+							{
+								text: 'OK',
+								onPress: () => setCode(''),
+							},
+						]);
+					});
+			}
+		}
+	};
+
+	const handleResendCode = async () => {
+		setIsResent(true);
+		setReconfirm(
+			await auth().signInWithPhoneNumber(
+				mobileNumberUnifier(mobileNumber),
+				true,
+			),
+		);
+	};
 
 	const {
 		container,
@@ -17,9 +111,6 @@ const MobileConfirmationScreen = (props) => {
 		titlePadding,
 		titleText,
 		bodyContainer,
-		inputFormContainer,
-		formContainerStyle,
-		formTextFieldStyle,
 	} = styles;
 
 	return (
@@ -32,19 +123,22 @@ const MobileConfirmationScreen = (props) => {
 				</View>
 			</View>
 			<View style={bodyContainer}>
-				<View style={inputFormContainer}>
-					<InputForm
-						containerStyle={formContainerStyle}
-						textFieldStyle={formTextFieldStyle}
-						fields={[
-							{
-								placeholder: 'Confirmation Code',
-								placeholderColor: Colors.Gray,
-								textColor: Colors.White,
-								value: code,
-								onChangeText: (text) => setCode(text),
-							},
-						]}
+				<View
+					style={{
+						borderBottomWidth: 2,
+						borderBottomColor: underlineColor,
+					}}
+				>
+					<BottomSheetTextInput
+						placeholder='Confirmation Code'
+						placeholderTextColor={Colors.Gray}
+						value={code}
+						onChangeText={(text) => setCode(text)}
+						onFocus={() => setUnderlineColor(Colors.PrimaryColor)}
+						onBlur={() => setUnderlineColor(Colors.AccentColor)}
+						style={{
+							color: Colors.White,
+						}}
 					/>
 				</View>
 				<View
@@ -56,13 +150,17 @@ const MobileConfirmationScreen = (props) => {
 					}}
 				>
 					<Text style={{ color: Colors.White }}>
-						Didn't receive the code?{' '}
+						{isResent
+							? 'You can resend the code again after '
+							: "Didn't receive the code? "}
 					</Text>
 					<TextButton
-						title='Send it again!'
-						titleColor={Colors.PrimaryColor}
+						title={isResent ? count : 'Send it again!'}
+						titleColor={
+							isResent ? Colors.White : Colors.PrimaryColor
+						}
 						titleWeight='bold'
-						onPress={() => console.log('Will Send It Again')}
+						onPress={isResent ? null : handleResendCode}
 					/>
 				</View>
 				<View
@@ -75,8 +173,7 @@ const MobileConfirmationScreen = (props) => {
 						height={60}
 						title='Confirm'
 						titleColor='#fff'
-						// onPress={handleSignIn}
-						onPress={onClose}
+						onPress={confirmVerificationCode}
 						borderRadius={30}
 						backgroundColor={Colors.PrimaryColor}
 					/>

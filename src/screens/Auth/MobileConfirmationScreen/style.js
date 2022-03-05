@@ -4,12 +4,10 @@ import Colors from '../../../constants/Colors';
 export const styles = StyleSheet.create({
 	container: {
 		width: '100%',
-		// height: '100%',
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingHorizontal: 32,
-		backgroundColor: Colors.BackgroundColor,
 	},
 	titleContainer: {
 		flex: 1,
@@ -31,15 +29,5 @@ export const styles = StyleSheet.create({
 		flex: 2.5,
 		width: '100%',
 		justifyContent: 'flex-start',
-	},
-	inputFormContainer: {
-		// flex: 1,
-	},
-	formContainerStyle: {
-		// flex: 1,
-	},
-	formTextFieldStyle: {
-		// flex: 1,
-		//
 	},
 });

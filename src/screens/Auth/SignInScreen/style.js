@@ -10,21 +10,31 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 32,
 		backgroundColor: Colors.BackgroundColor,
 	},
-	topSpacer: { flex: 0.5 },
+	topSpacer: { flex: 0.25 },
+	headerContainer: {
+		flex: 2,
+	},
 	titleContainer: {
-		flex: 1,
+		flex: 3,
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 		alignSelf: 'flex-start',
 	},
 	titlePadding: {
-		flex: 0.5,
+		flex: 1,
 	},
 	titleText: {
 		fontSize: 35,
 		flexWrap: 'wrap',
 		color: Colors.PrimaryColor,
+	},
+	descriptionContainer: {
+		flex: 2,
+	},
+	descriptionText: {
+		fontSize: 16,
+		color: Colors.White,
 	},
 	bodyContainer: {
 		flex: 2.5,
@@ -44,10 +54,7 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 	},
-	bodyFooterContainer: {
+	bodyBottomSpacer: {
 		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'center',
 	},
-	bodyFooterText: { color: Colors.White },
 });
