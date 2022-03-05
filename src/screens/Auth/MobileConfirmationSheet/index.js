@@ -8,7 +8,7 @@ import mobileNumberUnifier from '../../../utils/mobileNumberUnifier';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
 
-const MobileConfirmationScreen = (props) => {
+const MobileConfirmationSheet = (props) => {
 	const { onClose, confirm, mobileNumber, signInHandler } = props;
 
 	let timer;
@@ -183,4 +183,4 @@ const MobileConfirmationScreen = (props) => {
 	);
 };
 
-export default MobileConfirmationScreen;
+export default MobileConfirmationSheet;

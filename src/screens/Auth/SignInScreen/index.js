@@ -10,7 +10,7 @@ import {
 import auth from '@react-native-firebase/auth';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
-import MobileConfirmationScreen from '../MobileConfirmationScreen';
+import MobileConfirmationSheet from '../MobileConfirmationSheet';
 import mobileNumberUnifier from '../../../utils/mobileNumberUnifier';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
@@ -120,7 +120,7 @@ const SignInScreen = (props) => {
 					<View style={bodyBottomSpacer} />
 				</View>
 				<ModalBottomSheet bottomSheetModalRef={bottomSheetModalRef}>
-					<MobileConfirmationScreen
+					<MobileConfirmationSheet
 						onClose={onClose}
 						confirm={confirm}
 						mobileNumber={mobileNumber}
