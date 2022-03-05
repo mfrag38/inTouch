@@ -1,13 +1,12 @@
 import { StyleSheet } from 'react-native';
+import Colors from '../../constants/Colors';
 
 export const styles = StyleSheet.create({
 	container: {
 		width: '100%',
-		flexDirection: 'row',
+		height: '100%',
+		justifyContent: 'center',
 		alignItems: 'center',
-		borderBottomWidth: 2,
-	},
-	textInputStyle: {
-		flex: 1,
+		backgroundColor: Colors.White,
 	},
 });

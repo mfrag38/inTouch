@@ -1,0 +1,259 @@
+
+> Configure project :react-native-firebase_app
+:react-native-firebase_app package.json found at F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\@react-native-firebase\app\package.json
+:react-native-firebase_app:firebase.bom using default value: 29.1.0
+:react-native-firebase_app:play.play-services-auth using default value: 20.1.0
+:react-native-firebase_app package.json found at F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\@react-native-firebase\app\package.json
+:react-native-firebase_app:version set from package.json: 14.5.0 (14,5,0 - 14005000)
+:react-native-firebase_app:android.compileSdk using custom value: 30
+:react-native-firebase_app:android.targetSdk using custom value: 30
+:react-native-firebase_app:android.minSdk using custom value: 21
+:react-native-firebase_app:reactNativeAndroidDir F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\react-native\android
+
+> Configure project :react-native-firebase_auth
+:react-native-firebase_auth package.json found at F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\@react-native-firebase\auth\package.json
+:react-native-firebase_app package.json found at F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\@react-native-firebase\app\package.json
+:react-native-firebase_auth:firebase.bom using default value: 29.1.0
+:react-native-firebase_auth package.json found at F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\@react-native-firebase\auth\package.json
+:react-native-firebase_auth:version set from package.json: 14.5.0 (14,5,0 - 14005000)
+:react-native-firebase_auth:android.compileSdk using custom value: 30
+:react-native-firebase_auth:android.targetSdk using custom value: 30
+:react-native-firebase_auth:android.minSdk using custom value: 21
+:react-native-firebase_auth:reactNativeAndroidDir F:\Workspace\ReactNative\PentaValue\inTouch\node_modules\react-native\android
+
+The Kotlin Gradle plugin was loaded multiple times in different subprojects, which is not supported and may break the build. 
+This might happen in subprojects that apply the Kotlin plugins with the Gradle 'plugins { ... }' DSL if they specify explicit versions, even if the versions are equal.
+Please add the Kotlin plugin to the common parent project or the root project, then remove the versions in the subprojects.
+If the parent project does not need the plugin, add 'apply false' to the plugin line.
+See: https://docs.gradle.org/current/userguide/plugins.html#sec:subprojects_plugins_dsl
+The Kotlin plugin was loaded in the following projects: ':react-native-gesture-handler', ':react-native-screens'
+
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: F:\Workspace\ReactNative\PentaValue\inTouch\android\app\debug.keystore
+Alias: androiddebugkey
+MD5: 20:F4:61:48:B7:2D:8E:5E:5C:A2:3D:37:A4:F4:14:90
+SHA1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+SHA-256: FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C
+Valid until: Wednesday, May 1, 2052
+----------
+Variant: release
+Config: debug
+Store: F:\Workspace\ReactNative\PentaValue\inTouch\android\app\debug.keystore
+Alias: androiddebugkey
+MD5: 20:F4:61:48:B7:2D:8E:5E:5C:A2:3D:37:A4:F4:14:90
+SHA1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+SHA-256: FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C
+Valid until: Wednesday, May 1, 2052
+----------
+Variant: debugAndroidTest
+Config: debug
+Store: F:\Workspace\ReactNative\PentaValue\inTouch\android\app\debug.keystore
+Alias: androiddebugkey
+MD5: 20:F4:61:48:B7:2D:8E:5E:5C:A2:3D:37:A4:F4:14:90
+SHA1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+SHA-256: FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C
+Valid until: Wednesday, May 1, 2052
+----------
+Variant: debugUnitTest
+Config: debug
+Store: F:\Workspace\ReactNative\PentaValue\inTouch\android\app\debug.keystore
+Alias: androiddebugkey
+MD5: 20:F4:61:48:B7:2D:8E:5E:5C:A2:3D:37:A4:F4:14:90
+SHA1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+SHA-256: FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C
+Valid until: Wednesday, May 1, 2052
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: F:\Workspace\ReactNative\PentaValue\inTouch\android\app\debug.keystore
+Alias: androiddebugkey
+MD5: 20:F4:61:48:B7:2D:8E:5E:5C:A2:3D:37:A4:F4:14:90
+SHA1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+SHA-256: FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C
+Valid until: Wednesday, May 1, 2052
+----------
+
+> Task :react-native-firebase_app:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+
+> Task :react-native-firebase_auth:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+
+> Task :react-native-gesture-handler:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+
+> Task :react-native-safe-area-context:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+
+> Task :react-native-screens:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+
+> Task :react-native-vector-icons:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: debugUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+Variant: releaseUnitTest
+Config: debug
+Store: C:\Users\mfrag\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: BC:89:73:60:B7:D8:DE:30:94:08:CA:B1:46:B9:FB:44
+SHA1: 50:7F:28:1F:1E:88:88:65:7F:E6:02:49:5B:BE:D5:7B:78:93:78:64
+SHA-256: D5:B1:1C:C1:47:2D:34:EC:83:E1:E1:B8:F4:ED:2E:25:DE:C1:98:A6:29:BB:D9:E6:C5:04:D6:2B:CA:CA:D9:78
+Valid until: Saturday, March 11, 2051
+----------
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.2/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 19s
+7 actionable tasks: 7 executed

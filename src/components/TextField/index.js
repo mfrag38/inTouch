@@ -13,11 +13,12 @@ const TextField = (props) => {
 		value,
 		onChangeText,
 		secureTextEntry,
+		leftComponent,
 		rightComponent,
 		keyboardType,
 	} = props;
 
-	const { container } = styles;
+	const { container, textInputStyle } = styles;
 
 	return (
 		<View
@@ -30,6 +31,7 @@ const TextField = (props) => {
 				},
 			]}
 		>
+			{leftComponent ? leftComponent() : null}
 			<TextInput
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
@@ -39,10 +41,7 @@ const TextField = (props) => {
 				onChangeText={onChangeText}
 				secureTextEntry={secureTextEntry}
 				keyboardType={keyboardType}
-				style={{
-					flex: 1,
-					color: textColor,
-				}}
+				style={[textInputStyle, { color: textColor }]}
 			/>
 			{rightComponent ? rightComponent() : null}
 		</View>

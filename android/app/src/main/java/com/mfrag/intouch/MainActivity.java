@@ -1,4 +1,4 @@
-package com.intouch;
+package com.mfrag.intouch;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

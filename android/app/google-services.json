@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "980853549868",
+    "project_id": "intouch-1c9b4",
+    "storage_bucket": "intouch-1c9b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980853549868:android:ff152c55a6ddc255e75a89",
+        "android_client_info": {
+          "package_name": "com.mfrag.intouch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980853549868-m476m2qk855c6u3atvjri3adqu5leai9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mfrag.intouch",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "980853549868-imqlmsjs7a9pg5i2esaa1e6746e5umpi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcQ7sORMcsZOlN97h7k1UZY5ozen00_ok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980853549868-imqlmsjs7a9pg5i2esaa1e6746e5umpi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

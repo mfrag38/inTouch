@@ -18,14 +18,6 @@ export const styles = StyleSheet.create({
 		elevation: 3,
 		backgroundColor: Colors.HeaderBackgroundColor,
 	},
-	backButtonContainer: {
-		width: 56,
-		height: 56,
-		justifyContent: 'center',
-		alignItems: 'center',
-		position: 'absolute',
-		left: 0,
-	},
 	headerTitleContainer: {
 		height: '100%',
 		justifyContent: 'center',
@@ -52,7 +44,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	spacer: {
-		flex: 2,
+		flex: 1.5,
 	},
 	buttonContainer: {
 		flex: 1,
