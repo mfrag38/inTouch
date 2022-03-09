@@ -1,42 +1,96 @@
 export const groupArrayBy = (arr, criteria) => {
-	const result = arr.reduce((group, element) => {
-		const value = element[criteria];
-		// // console.log('The Value:', value);
-		// console.log('The Gro:', group);
-		// console.log('The Ele:', element);
-		// console.log('The Value:', value);
-		// console.log('The Group:', group);
-		/* console.log(
-			'Group:',
-			group.some((g) => g.title.includes(value)),
-		); */
-		/* --> HERE <-- console.log(
-			'Group Filter:',
-			group.filter((g) => g.title.includes(value)),
-		); */
-		// pets.some((pet) => pet.name.includes('cat'));
-		if (!group.some((g) => g.title.includes(value))) {
-			// group.filter((g) => g.title.includes(value));
-			// console.log('Would Do Something');
-			// } else {
-			const rr = arr.filter((el) => el.contactIcon.includes(value));
-			group.push({
-				title: value,
-				data: rr.sort((a, b) => {
-					if (a.contactName[1] < b.contactName[1]) return -1;
-					if (a.contactName[1] > b.contactName[1]) return 1;
-					return 0;
-				}),
-			});
+	const result = arr.reduce((groups, element) => {
+		const criteriaValue = element[criteria][0];
+		const rr = arr.filter((el) => el.displayName.startsWith(criteriaValue));
+		if (!groups.some((group) => group.title.includes(criteriaValue))) {
+			if (criteriaValue.match(/^\d/) || criteriaValue.match(/^\+/)) {
+				if (!groups.some((group) => group.title.includes('#'))) {
+					groups.push({
+						title: '#',
+						data: rr.sort((a, b) => {
+							if (
+								a.displayName.toLowerCase() <
+								b.displayName.toLowerCase()
+							)
+								return -1;
+							if (
+								a.displayName.toLowerCase() >
+								b.displayName.toLowerCase()
+							)
+								return 1;
+							return 0;
+						}),
+					});
+				} else {
+					if (
+						!groups[
+							findIndexWithAttr(groups, 'title', '#')
+						].data.some((d) =>
+							d.displayName.startsWith(criteriaValue),
+						)
+					) {
+						groups[
+							findIndexWithAttr(groups, 'title', '#')
+						].data.push(
+							...rr.sort((a, b) => {
+								if (
+									a.displayName.toLowerCase() <
+									b.displayName.toLowerCase()
+								)
+									return -1;
+								if (
+									a.displayName.toLowerCase() >
+									b.displayName.toLowerCase()
+								)
+									return 1;
+								return 0;
+							}),
+						);
+					}
+				}
+			} else {
+				groups.push({
+					title: criteriaValue,
+					data: rr.sort((a, b) => {
+						if (
+							a.displayName.toLowerCase() <
+							b.displayName.toLowerCase()
+						)
+							return -1;
+						if (
+							a.displayName.toLowerCase() >
+							b.displayName.toLowerCase()
+						)
+							return 1;
+						return 0;
+					}),
+				});
+			}
 		}
-		// group[value] = group[value] ?? [];
-		// group[value].push(element);
-		return group;
+		return groups;
 	}, []);
 
-	return result.sort((a, b) => {
+	var numbersSection = result.splice(
+		findIndexWithAttr(result, 'title', '#'),
+		1,
+	);
+
+	result.sort((a, b) => {
 		if (a.title < b.title) return -1;
 		if (a.title > b.title) return 1;
 		return 0;
 	});
+
+	result.push(...numbersSection);
+
+	return result;
+};
+
+export const findIndexWithAttr = (arr, attr, value) => {
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i][attr] === value) {
+			return i;
+		}
+	}
+	return -1;
 };

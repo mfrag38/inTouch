@@ -12,7 +12,6 @@ const App = () => {
 	// return <AdditionalUserInfoScreen />;
 	// return <FavoriteContactsScreen />;
 	// return <ContactsScreen />;
-	// return <SignUpScreen />;
 	// return <SignInScreen />;
 };
 

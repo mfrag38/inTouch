@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Contacts from 'react-native-contacts';
 import ContactsList from '../../components/ContactsList';
 import { groupArrayBy } from '../../utils/arrayOperations';
 import Colors from '../../constants/Colors';
@@ -149,6 +150,44 @@ const FavoriteContactsScreen = (props) => {
 				</View>
 				<View style={headerTitleContainer}>
 					<Text style={headerTitleText}>Favorite Contacts</Text>
+				</View>
+				<View
+					style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+						position: 'absolute',
+						right: 0,
+					}}
+				>
+					<TouchableHighlight
+						style={{
+							width: 48,
+							height: 48,
+							justifyContent: 'center',
+							alignItems: 'center',
+							borderRadius: 56,
+							overflow: 'hidden',
+						}}
+						underlayColor={Colors.DimGrayOpacity}
+						onPress={() => {
+							Contacts.getCount()
+								.then((count) => {
+									console.log('Contacts Count:', count);
+								})
+								.catch((error) => {
+									console.log(
+										'Getting Contacts Count Error:',
+										error,
+									);
+								});
+						}}
+					>
+						<Icon
+							name='console'
+							size={36}
+							color={Colors.PrimaryColor}
+						/>
+					</TouchableHighlight>
 				</View>
 			</View>
 			<View style={bodyContainer}>

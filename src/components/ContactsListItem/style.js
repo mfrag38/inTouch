@@ -1,19 +1,20 @@
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Colors from '../../constants/Colors';
 
 export const styles = StyleSheet.create({
 	itemContainer: {
+		height: 60,
 		flexDirection: 'row',
-		height: StatusBar.currentHeight * 2.1,
 		alignItems: 'center',
-		paddingHorizontal: 16,
 	},
 	itemLeadingContainer: {
-		width: 42,
-		height: 42,
+		width: 40,
+		height: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
-		borderRadius: 42,
+		marginLeft: 8,
+		marginRight: 16,
+		borderRadius: 40,
 		overflow: 'hidden',
 		backgroundColor: Colors.DarkCyan,
 	},
@@ -27,7 +28,6 @@ export const styles = StyleSheet.create({
 		height: '100%',
 		justifyContent: 'space-evenly',
 		alignItems: 'flex-start',
-		marginHorizontal: 8,
 	},
 	itemTitleText: {
 		fontSize: 20,
