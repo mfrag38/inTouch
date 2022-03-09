@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		height: 1,
-		marginLeft: 72,
+		marginLeft: 64,
 		backgroundColor: Colors.Gray,
 	},
 });

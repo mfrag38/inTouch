@@ -20,13 +20,10 @@ const ContactsListItem = (props) => {
 	return (
 		<View style={itemContainer}>
 			<View style={itemLeadingContainer}>
-				<Text style={itemLeadingText}>{item.contactIcon}</Text>
+				<Text style={itemLeadingText}>{item.displayName[0]}</Text>
 			</View>
 			<View style={itemTitlesContainer}>
-				<Text style={itemTitleText}>{item.contactName}</Text>
-				<Text style={itemSubTitleText} numberOfLines={1}>
-					{item.contactStatus}
-				</Text>
+				<Text style={itemTitleText}>{item.displayName}</Text>
 			</View>
 			<View style={itemTailContainer}>
 				<Icon

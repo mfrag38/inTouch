@@ -1,11 +1,19 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableHighlight } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+	View,
+	Text,
+	TextInput,
+	TouchableHighlight,
+	PermissionsAndroid,
+	Alert,
+	Linking,
+} from 'react-native';
+import Contacts from 'react-native-contacts';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ContactsList from '../../components/ContactsList';
 import SelectionList from '../../components/SelectionList';
 import Colors from '../../constants/Colors';
 import { groupArrayBy } from '../../utils/arrayOperations';
-import Contacts from './Contacts';
 import { styles } from './style';
 
 const selectedContacts = [
@@ -60,20 +68,60 @@ const selectedContacts = [
 ];
 
 const ContactsScreen = (props) => {
-	/* const dataGetter = () => {
-		var returnData = [];
-		const ff = groupArrayBy(Contacts, 'contactIcon');
-		// console.log('FF:', ff);
-		// console.log(pets.some((pet) => pet.name.includes('cat')));
-		// console.log(
-		// 	Contacts.filter((contact) => contact.contactIcon.includes('A')),
-		// );
-		// console.log(
-		// 	Contacts.includes((contact) => contact.contactIcon.includes('D')),
-		// );
-		// console.log('The FF:', ff);
-		return ff;
-	}; */
+	const [isLoading, setIsLoading] = useState(false);
+	const [contactsState, setContactsState] = useState(null);
+
+	useEffect(() => {
+		contactsInitializer();
+	}, []);
+
+	const contactsInitializer = () => {
+		setIsLoading(true);
+		if (contactsState === null) {
+			PermissionsAndroid.request(
+				PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+				{
+					title: 'inTouch',
+					message:
+						'inTouch would have access to view your contacts in order to work as expected',
+					buttonPositive: 'Ok',
+					buttonNegative: 'Cancel',
+				},
+			)
+				.then((res) => {
+					if (res === 'granted') {
+						Contacts.getAll()
+							.then((contacts) => {
+								setContactsState(contacts);
+							})
+							.catch((error) => {
+								console.log('Getting Contacts Error:', error);
+							});
+					} else if (res === 'denied') {
+						contactsInitializer();
+					} else if (res === 'never_ask_again') {
+						Alert.alert(
+							'Permission required',
+							'You have to grant permission to view your contacts.',
+							[
+								{
+									text: 'Cancel',
+									style: 'cancel',
+								},
+								{
+									text: 'Allow',
+									onPress: () => Linking.openSettings(),
+									style: 'default',
+								},
+							],
+						);
+					}
+				})
+				.catch((error) => {
+					console.log('Granting Permission Error:', error);
+				});
+		}
+	};
 
 	const {
 		container,
@@ -150,7 +198,11 @@ const ContactsScreen = (props) => {
 			) : null}
 			<View style={bodyContainer}>
 				<ContactsList
-					contacts={groupArrayBy(Contacts, 'contactIcon')}
+					contacts={
+						contactsState
+							? groupArrayBy(contactsState, 'displayName')
+							: []
+					}
 				/>
 			</View>
 		</View>

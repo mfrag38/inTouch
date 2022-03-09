@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SectionList } from 'react-native';
 import ContactsListItem from '../ContactsListItem';
 import ContactsListSectionHeader from '../ContactsListSectionHeader';
@@ -8,19 +8,33 @@ import { styles } from './style';
 const ContactsList = (props) => {
 	const { contacts } = props;
 
+	const keyExtractor = useCallback((item, index) => item + index);
+
+	const renderItem = useCallback(({ item }) => (
+		<ContactsListItem item={item} />
+	));
+
+	const renderSectionHeader = useCallback(({ section: { title } }) => (
+		<ContactsListSectionHeader title={title} />
+	));
+
+	const ItemSeparatorComponent = useCallback(() => (
+		<ContactsListItemSeparator />
+	));
+
 	const { contentContainerStyle } = styles;
 
 	return (
 		<SectionList
 			sections={contacts}
-			keyExtractor={(item, index) => item + index}
-			renderItem={({ item }) => <ContactsListItem item={item} />}
+			keyExtractor={keyExtractor}
+			renderItem={renderItem}
 			stickySectionHeadersEnabled={true}
-			renderSectionHeader={({ section: { title } }) => (
-				<ContactsListSectionHeader title={title} />
-			)}
-			ItemSeparatorComponent={() => <ContactsListItemSeparator />}
+			renderSectionHeader={renderSectionHeader}
+			ItemSeparatorComponent={ItemSeparatorComponent}
 			contentContainerStyle={contentContainerStyle}
+			maxToRenderPerBatch={5}
+			windowSize={5}
 		/>
 	);
 };
