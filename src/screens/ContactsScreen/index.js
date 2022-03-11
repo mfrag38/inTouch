@@ -8,12 +8,15 @@ import {
 	Alert,
 	Linking,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import Contacts from 'react-native-contacts';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import auth from '@react-native-firebase/auth';
 import ContactsList from '../../components/ContactsList';
 import SelectionList from '../../components/SelectionList';
-import Colors from '../../constants/Colors';
+import { setIsAuthenticated } from '../../redux/actions/authActions';
 import { groupArrayBy } from '../../utils/arrayOperations';
+import Colors from '../../constants/Colors';
 import { styles } from './style';
 
 const selectedContacts = [
@@ -71,6 +74,8 @@ const ContactsScreen = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [contactsState, setContactsState] = useState(null);
 
+	const dispatch = useDispatch();
+
 	useEffect(() => {
 		contactsInitializer();
 	}, []);
@@ -95,7 +100,11 @@ const ContactsScreen = (props) => {
 								setContactsState(contacts);
 							})
 							.catch((error) => {
-								console.log('Getting Contacts Error:', error);
+								console.warn('Getting Contacts Error:', error);
+								Alert.alert(
+									'Error',
+									'Some error happened while fetching your contacts.',
+								);
 							});
 					} else if (res === 'denied') {
 						contactsInitializer();
@@ -118,9 +127,40 @@ const ContactsScreen = (props) => {
 					}
 				})
 				.catch((error) => {
-					console.log('Granting Permission Error:', error);
+					console.warn('Granting Permission Error:', error);
+					Alert.alert(
+						'Error',
+						'Some error happened while granting permission.',
+					);
 				});
 		}
+	};
+
+	const signOutHandler = () => {
+		auth()
+			.signOut()
+			.then(() => {
+				console.log('Signed Out');
+				dispatch(setIsAuthenticated(false));
+			})
+			.catch((error) => {
+				console.warn('Sign Out Error:', error);
+				Alert.alert(
+					'Error',
+					'Some error happened while singing you out.',
+					[
+						{
+							text: 'Sign Out Anyway',
+							onPress: () => dispatch(setIsAuthenticated(false)),
+						},
+						{
+							text: 'Try Again!',
+							style: 'cancel',
+							onPress: signOutHandler,
+						},
+					],
+				);
+			});
 	};
 
 	const {
@@ -147,7 +187,7 @@ const ContactsScreen = (props) => {
 						<TouchableHighlight
 							style={headerActionButton}
 							underlayColor={Colors.DimGrayOpacity}
-							onPress={() => props.route.params.signOutHandler()}
+							onPress={signOutHandler}
 						>
 							<Icon
 								name='logout'

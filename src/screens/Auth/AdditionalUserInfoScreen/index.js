@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
+import {
+	setIsAddLoading,
+	setIsAuthenticated,
+} from '../../../redux/actions/authActions';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
 
 const AdditionalUserInfoScreen = (props) => {
-	const { userId } = props;
-
+	const { isAddLoading } = useSelector((state) => state.Auth);
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
+
+	const dispatch = useDispatch();
 
 	const handleSignUp = () => {
 		if (name.length === 0) {
@@ -18,6 +24,7 @@ const AdditionalUserInfoScreen = (props) => {
 		} else if (email.length === 0) {
 			Alert.alert('Error', 'Please type your email.');
 		} else {
+			dispatch(setIsAddLoading(true));
 			Promise.all([
 				auth().currentUser.updateProfile({
 					displayName: name,
@@ -25,11 +32,28 @@ const AdditionalUserInfoScreen = (props) => {
 				auth().currentUser.updateEmail(email),
 			])
 				.then((res) => {
-					// TODO: Store Auth State And User Info And Go To Home Screen
-					props.route.params.signInHandler();
+					dispatch(setIsAddLoading(false));
+					dispatch(setIsAuthenticated(true));
 				})
 				.catch((error) => {
-					console.log('Update User Info Error:', error);
+					console.warn('Additional Info Error:', error);
+					dispatch(setIsAddLoading(false));
+					Alert.alert(
+						'Error',
+						'Some error happened while adding your info.',
+						[
+							{
+								text: 'Try again',
+								style: 'cancel',
+								onPress: handleSignUp,
+							},
+							{
+								text: 'Skip',
+								onPress: () =>
+									dispatch(setIsAuthenticated(true)),
+							},
+						],
+					);
 				});
 		}
 	};
@@ -91,7 +115,8 @@ const AdditionalUserInfoScreen = (props) => {
 						height={60}
 						title='Sign up'
 						titleColor='#fff'
-						onPress={handleSignUp}
+						isLoading={isAddLoading}
+						onPress={isAddLoading === true ? null : handleSignUp}
 						borderRadius={30}
 						backgroundColor={Colors.PrimaryColor}
 					/>
