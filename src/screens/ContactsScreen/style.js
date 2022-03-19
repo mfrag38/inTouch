@@ -76,6 +76,8 @@ export const styles = StyleSheet.create({
 		width: '100%',
 	},
 	bodyContainer: {
+		flex: 1,
 		width: '100%',
+		justifyContent: 'center',
 	},
 });

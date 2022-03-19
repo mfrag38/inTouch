@@ -13,14 +13,14 @@ export const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: 56,
-		backgroundColor: Colors.DodgerBlue,
+		backgroundColor: Colors.PrimaryColor,
 	},
 	avatarText: {
 		fontSize: 24,
 		fontWeight: 'bold',
 		color: Colors.White,
 	},
-	deselectButtonContainer: {
+	deselectButton: {
 		width: 24,
 		height: 24,
 		justifyContent: 'center',
@@ -31,6 +31,12 @@ export const styles = StyleSheet.create({
 		borderRadius: 24,
 		overflow: 'hidden',
 		backgroundColor: Colors.SoftGray,
+	},
+	deselectButtonContainer: {
+		width: '100%',
+		height: '100%',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	spacer: {
 		height: 8,

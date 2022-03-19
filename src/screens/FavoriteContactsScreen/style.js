@@ -44,6 +44,22 @@ export const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: Colors.White,
 	},
+	headerActionContainer: {
+		width: 56,
+		height: 56,
+		justifyContent: 'center',
+		alignItems: 'center',
+		position: 'absolute',
+		right: 0,
+	},
+	headerActionButton: {
+		width: 48,
+		height: 48,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 56,
+		overflow: 'hidden',
+	},
 	bodyContainer: {
 		width: '100%',
 		flex: 1,

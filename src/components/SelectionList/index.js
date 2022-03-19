@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList } from 'react-native';
 import SelectionItem from '../SelectionItem';
 import { styles } from './style';
 
 const SelectionList = (props) => {
-	const { selectedContacts } = props;
+	const { selectedContacts, onDeselectionPress } = props;
+
+	const keyExtractor = useCallback((item, index) => item + index);
+
+	const renderItem = useCallback(({ item }) => (
+		<SelectionItem
+			item={item}
+			onDeselectionPress={() => onDeselectionPress(item)}
+		/>
+	));
 
 	const { contentContainerStyle } = styles;
 
 	return (
 		<FlatList
 			data={selectedContacts}
-			keyExtractor={(item, index) => item + index}
+			keyExtractor={keyExtractor}
 			horizontal={true}
-			renderItem={({ item }) => <SelectionItem item={item} />}
+			renderItem={renderItem}
 			showsHorizontalScrollIndicator={false}
 			contentContainerStyle={contentContainerStyle}
 		/>
