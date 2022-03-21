@@ -6,8 +6,6 @@ import AdditionalUserInfoScreen from '../screens/Auth/AdditionalUserInfoScreen';
 const AuthStack = createNativeStackNavigator();
 
 const AuthNavigator = (props) => {
-	const { signInHandler } = props;
-
 	return (
 		<AuthStack.Navigator initialRouteName='SignIn'>
 			<AuthStack.Screen
@@ -16,7 +14,6 @@ const AuthNavigator = (props) => {
 				options={{
 					headerShown: false,
 				}}
-				initialParams={{ signInHandler: signInHandler }}
 			/>
 			<AuthStack.Screen
 				name='AdditionalUserInfo'

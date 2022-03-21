@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
 		marginRight: 16,
 		borderRadius: 40,
 		overflow: 'hidden',
-		backgroundColor: Colors.DarkCyan,
+		backgroundColor: Colors.PrimaryColor,
 	},
 	itemLeadingText: {
 		fontSize: 24,
@@ -33,9 +33,6 @@ export const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		color: Colors.White,
-	},
-	itemSubTitleText: {
-		color: Colors.Gray,
 	},
 	itemTailContainer: {
 		width: 36,

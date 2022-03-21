@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import RoundedButton from '../../../components/RoundedButton';
 import TextButton from '../../../components/TextButton';
 import mobileNumberUnifier from '../../../utils/mobileNumberUnifier';
+import {
+	setIsConfirmLoading,
+	setIsAuthenticated,
+} from '../../../redux/actions/authActions';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
 
 const MobileConfirmationSheet = (props) => {
-	const { onClose, confirm, mobileNumber, signInHandler } = props;
+	const { dismiss, mobileNumber } = props;
+
+	const { confirmation, isConfirmLoading } = useSelector(
+		(state) => state.Auth,
+	);
+
+	const dispatch = useDispatch();
 
 	let timer;
 
@@ -43,23 +54,23 @@ const MobileConfirmationSheet = (props) => {
 		if (code.length === 0) {
 			Alert.alert('Error', 'Please type confirmation code');
 		} else {
+			dispatch(setIsConfirmLoading(true));
 			if (reconfirm === null) {
-				confirm
+				confirmation
 					.confirm(code)
 					.then((res) => {
 						if (res.additionalUserInfo.isNewUser === true) {
-							onClose();
-							props.navigation.navigate('AdditionalUserInfo', {
-								user: res.user,
-								userId: res.user.uid,
-								signInHandler: signInHandler,
-							});
+							dispatch(setIsConfirmLoading(false));
+							dismiss();
+							props.navigation.navigate('AdditionalUserInfo');
 						} else {
-							signInHandler();
+							dispatch(setIsConfirmLoading(false));
+							dispatch(setIsAuthenticated(true));
 						}
 					})
 					.catch((error) => {
-						console.log('Code Verification Error:', error);
+						console.warn('Code Verification Error:', error);
+						dispatch(setIsConfirmLoading(false));
 						Alert.alert('Error', 'Invalid Verification Code', [
 							{
 								text: 'OK',
@@ -72,18 +83,17 @@ const MobileConfirmationSheet = (props) => {
 					.confirm(code)
 					.then((res) => {
 						if (res.additionalUserInfo.isNewUser === true) {
-							onClose();
-							props.navigation.navigate('AdditionalUserInfo', {
-								user: res.user,
-								userId: res.user.uid,
-								signInHandler: signInHandler,
-							});
+							dispatch(setIsConfirmLoading(false));
+							dismiss();
+							props.navigation.navigate('AdditionalUserInfo');
 						} else {
-							signInHandler();
+							dispatch(setIsConfirmLoading(false));
+							dispatch(setIsAuthenticated(true));
 						}
 					})
 					.catch((error) => {
-						console.log('Code Verification Error:', error);
+						console.warn('Code Verification Error:', error);
+						dispatch(setIsConfirmLoading(false));
 						Alert.alert('Error', 'Invalid Verification Code', [
 							{
 								text: 'OK',
@@ -173,7 +183,12 @@ const MobileConfirmationSheet = (props) => {
 						height={60}
 						title='Confirm'
 						titleColor='#fff'
-						onPress={confirmVerificationCode}
+						isLoading={isConfirmLoading}
+						onPress={
+							isConfirmLoading === true
+								? null
+								: confirmVerificationCode
+						}
 						borderRadius={30}
 						backgroundColor={Colors.PrimaryColor}
 					/>

@@ -1,199 +1,278 @@
-import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableHighlight, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Contacts from 'react-native-contacts';
 import ContactsList from '../../components/ContactsList';
+import EmptyListComponent from '../../components/EmptyListComponent';
+import { setIsContactsMultiSelect } from '../../redux/actions/contactsActions';
+import {
+	removeFromFavoriteContacts,
+	removeAllFavoriteContacts,
+	setIsFavoritesMultiSelect,
+	switchFavoriteContactSelection,
+	clearSelectedFavoriteContacts,
+	searchFavoriteContacts,
+	clearFavoriteSearchResult,
+} from '../../redux/actions/favoriteContactsActions';
 import { groupArrayBy } from '../../utils/arrayOperations';
 import Colors from '../../constants/Colors';
 import { styles } from './style';
-
-const FavoriteContacts = [
-	{
-		contactName: 'Lee Barber',
-		contactStatus: 'fugiat eiusmod Lorem pariatur est officia',
-		contactIcon: 'L',
-	},
-	{
-		contactName: 'Debora Gomez',
-		contactStatus:
-			'adipisicing esse exercitation consequat pariatur officia',
-		contactIcon: 'D',
-	},
-	{
-		contactName: 'White Mcbride',
-		contactStatus: 'ut laboris adipisicing veniam dolore nisi',
-		contactIcon: 'W',
-	},
-	{
-		contactName: 'Marta Daniels',
-		contactStatus: 'reprehenderit eiusmod non laboris aliqua sunt',
-		contactIcon: 'M',
-	},
-	{
-		contactName: 'Adeline Dudley',
-		contactStatus: 'minim est aliquip veniam proident qui',
-		contactIcon: 'A',
-	},
-	{
-		contactName: 'Donaldson Talley',
-		contactStatus: 'labore excepteur enim nostrud eu sint',
-		contactIcon: 'D',
-	},
-	{
-		contactName: 'Mathis Ford',
-		contactStatus: 'commodo aute culpa exercitation est et',
-		contactIcon: 'M',
-	},
-	{
-		contactName: 'Cannon Harrell',
-		contactStatus: 'minim est adipisicing nulla et laborum',
-		contactIcon: 'C',
-	},
-	{
-		contactName: 'Hooper Michael',
-		contactStatus: 'mollit deserunt deserunt enim proident deserunt',
-		contactIcon: 'H',
-	},
-	{
-		contactName: 'Mckay Perry',
-		contactStatus: 'excepteur sint labore sint sint qui',
-		contactIcon: 'M',
-	},
-	{
-		contactName: 'Kirk Wong',
-		contactStatus: 'Lorem duis nostrud est amet anim',
-		contactIcon: 'K',
-	},
-	{
-		contactName: 'Mitchell Fulton',
-		contactStatus: 'quis laboris et esse aliqua culpa',
-		contactIcon: 'M',
-	},
-	{
-		contactName: 'Eddie Wilkinson',
-		contactStatus: 'adipisicing ad laborum eiusmod in esse',
-		contactIcon: 'E',
-	},
-	{
-		contactName: 'Thompson Swanson',
-		contactStatus: 'non nisi laboris aliqua commodo id',
-		contactIcon: 'T',
-	},
-	{
-		contactName: 'Oliver Schmidt',
-		contactStatus: 'magna eu officia deserunt et nisi',
-		contactIcon: 'O',
-	},
-	{
-		contactName: 'Virginia Benson',
-		contactStatus: 'duis qui sunt mollit aute consectetur',
-		contactIcon: 'V',
-	},
-	{
-		contactName: 'Olson Mathews',
-		contactStatus: 'ea laborum dolore nisi consectetur ea',
-		contactIcon: 'O',
-	},
-	{
-		contactName: 'Wyatt Pugh',
-		contactStatus: 'Lorem proident nisi ex duis aute',
-		contactIcon: 'W',
-	},
-	{
-		contactName: 'Lina Simon',
-		contactStatus: 'dolore tempor fugiat tempor esse cillum',
-		contactIcon: 'L',
-	},
-	{
-		contactName: 'James Larsen',
-		contactStatus: 'id irure ullamco duis consectetur aute',
-		contactIcon: 'J',
-	},
-	{
-		contactName: 'Ruby Mueller',
-		contactStatus: 'laborum nostrud officia id sint consequat',
-		contactIcon: 'R',
-	},
-	{
-		contactName: 'Earlene Crawford',
-		contactStatus: 'dolore non duis ad aliqua reprehenderit',
-		contactIcon: 'E',
-	},
-];
+import SelectionList from '../../components/SelectionList';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const FavoriteContactsScreen = (props) => {
 	const {
+		favoriteContacts,
+		isFavoritesMultiSelect,
+		selectedFavoriteContacts,
+		favoritesSearchResult,
+	} = useSelector((state) => state.FavoriteContacts);
+	const [favoriteSearchTerm, setFavoriteSearchTerm] = useState('');
+
+	useEffect(() => {
+		if (favoriteSearchTerm.length !== 0) {
+			dispatch(searchFavoriteContacts(favoriteSearchTerm));
+		} else {
+			dispatch(clearFavoriteSearchResult());
+		}
+	}, [favoriteSearchTerm]);
+
+	const dispatch = useDispatch();
+
+	const {
 		container,
 		headerContainer,
+		headerTopContainer,
 		backButtonContainer,
 		backButton,
 		headerTitleContainer,
 		headerTitleText,
+		headerActionContainer,
+		headerActionButton,
+		headerBottomContainer,
+		headerBottomLeadContainer,
+		headerInputSearchFieldContainer,
+		headerBottomTailContainer,
+		headerBottomTailButton,
 		bodyContainer,
 	} = styles;
 
 	return (
 		<View style={container}>
 			<View style={headerContainer}>
-				<View style={backButtonContainer}>
-					<TouchableHighlight
-						style={backButton}
-						underlayColor={Colors.DimGrayOpacity}
-						onPress={() => props.navigation.goBack()}
-					>
-						<Icon
-							name='chevron-left'
-							size={36}
-							color={Colors.PrimaryColor}
-						/>
-					</TouchableHighlight>
-				</View>
-				<View style={headerTitleContainer}>
-					<Text style={headerTitleText}>Favorite Contacts</Text>
-				</View>
-				<View
-					style={{
-						justifyContent: 'center',
-						alignItems: 'center',
-						position: 'absolute',
-						right: 0,
-					}}
-				>
-					<TouchableHighlight
-						style={{
-							width: 48,
-							height: 48,
-							justifyContent: 'center',
-							alignItems: 'center',
-							borderRadius: 56,
-							overflow: 'hidden',
-						}}
-						underlayColor={Colors.DimGrayOpacity}
-						onPress={() => {
-							Contacts.getCount()
-								.then((count) => {
-									console.log('Contacts Count:', count);
-								})
-								.catch((error) => {
-									console.log(
-										'Getting Contacts Count Error:',
-										error,
+				<View style={headerTopContainer}>
+					<View style={backButtonContainer}>
+						<TouchableHighlight
+							style={backButton}
+							underlayColor={Colors.DimGrayOpacity}
+							onPress={
+								isFavoritesMultiSelect
+									? () => {
+											dispatch(
+												clearSelectedFavoriteContacts(),
+											);
+											dispatch(
+												setIsFavoritesMultiSelect(
+													false,
+												),
+											);
+									  }
+									: () => props.navigation.goBack()
+							}
+						>
+							<Icon
+								name={
+									isFavoritesMultiSelect
+										? 'close'
+										: 'chevron-left'
+								}
+								size={24}
+								color={Colors.PrimaryColor}
+							/>
+						</TouchableHighlight>
+					</View>
+					<View style={headerTitleContainer}>
+						<Text style={headerTitleText}>Favorite Contacts</Text>
+						<Text
+							style={{
+								color: Colors.White,
+							}}
+						>
+							{isFavoritesMultiSelect
+								? `${selectedFavoriteContacts.length} / `
+								: null}
+							{favoriteContacts.length}
+						</Text>
+					</View>
+					{isFavoritesMultiSelect ? (
+						<View style={headerActionContainer}>
+							<TouchableHighlight
+								style={headerActionButton}
+								underlayColor={Colors.DimGrayOpacity}
+								onPress={() => {
+									dispatch(setIsFavoritesMultiSelect(false));
+									dispatch(
+										removeFromFavoriteContacts(
+											selectedFavoriteContacts,
+										),
 									);
-								});
-						}}
-					>
-						<Icon
-							name='console'
-							size={36}
-							color={Colors.PrimaryColor}
+									dispatch(clearSelectedFavoriteContacts());
+								}}
+							>
+								<Icon
+									name='star-minus'
+									size={30}
+									color={Colors.PrimaryColor}
+								/>
+							</TouchableHighlight>
+						</View>
+					) : null}
+				</View>
+				<View style={headerBottomContainer}>
+					<View style={headerBottomLeadContainer}>
+						<Icon name='magnify' size={24} color={Colors.Grey} />
+					</View>
+					<View style={headerInputSearchFieldContainer}>
+						<TextInput
+							numberOfLines={1}
+							placeholder='Search'
+							placeholderTextColor={Colors.Grey}
+							style={{
+								color: Colors.White,
+							}}
+							onChangeText={(text) => setFavoriteSearchTerm(text)}
+							value={favoriteSearchTerm}
 						/>
-					</TouchableHighlight>
+					</View>
+					{favoriteSearchTerm.length !== 0 ? (
+						<View style={headerBottomTailContainer}>
+							<TouchableOpacity
+								style={headerBottomTailButton}
+								onPress={() => setFavoriteSearchTerm('')}
+							>
+								<Icon
+									name='close'
+									size={24}
+									color={Colors.Grey}
+								/>
+							</TouchableOpacity>
+						</View>
+					) : null}
 				</View>
 			</View>
+			{isFavoritesMultiSelect && selectedFavoriteContacts.length != 0 ? (
+				<View
+					style={{
+						width: '100%',
+					}}
+				>
+					<SelectionList
+						selectedContacts={selectedFavoriteContacts}
+						onDeselectionPress={(item) =>
+							dispatch(switchFavoriteContactSelection(item))
+						}
+					/>
+				</View>
+			) : null}
 			<View style={bodyContainer}>
 				<ContactsList
-					contacts={groupArrayBy(FavoriteContacts, 'contactIcon')}
+					contacts={
+						favoriteSearchTerm.length === 0
+							? groupArrayBy(favoriteContacts, 'displayName')
+							: groupArrayBy(favoritesSearchResult, 'displayName')
+					}
+					isContactsMultiSelect={isFavoritesMultiSelect}
+					selectedContacts={selectedFavoriteContacts}
+					onItemPress={(item) => {
+						if (isFavoritesMultiSelect === true) {
+							dispatch(switchFavoriteContactSelection(item));
+						} else {
+							Alert.alert(
+								'Info',
+								'Should go to contact details screen but it is not implemented.',
+							);
+						}
+					}}
+					onItemLongPress={(item) => {
+						if (isFavoritesMultiSelect === true) {
+							dispatch(switchFavoriteContactSelection(item));
+						} else {
+							dispatch(switchFavoriteContactSelection(item));
+							dispatch(setIsFavoritesMultiSelect(true));
+						}
+					}}
+					ListEmptyComponent={
+						<EmptyListComponent
+							text={`You have no favorite contacts,\nGo ahead and add some`}
+							showButton
+							buttonText='Add'
+							buttonOnPress={() => {
+								dispatch(setIsContactsMultiSelect(true));
+								props.navigation.goBack();
+							}}
+						/>
+					}
 				/>
+				{isFavoritesMultiSelect ? (
+					<View
+						style={{
+							width: 56,
+							height: 56,
+							justifyContent: 'center',
+							alignItems: 'center',
+							position: 'absolute',
+							right: 16,
+							bottom: 16,
+							borderRadius: 56,
+							overflow: 'hidden',
+							backgroundColor: Colors.PrimaryColor,
+						}}
+					>
+						<TouchableHighlight
+							style={{
+								width: '100%',
+								height: '100%',
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+							onPress={() => {
+								Alert.alert(
+									'Warning',
+									'You are about to remove all your favorite contacts, Are you sure?',
+									[
+										{
+											text: 'Remove All',
+											style: 'destructive',
+											onPress: () => {
+												dispatch(
+													setIsFavoritesMultiSelect(
+														false,
+													),
+												);
+												dispatch(
+													removeAllFavoriteContacts(),
+												);
+												dispatch(
+													clearSelectedFavoriteContacts(),
+												);
+											},
+										},
+										{
+											text: 'Cancel',
+											style: 'cancel',
+										},
+									],
+								);
+							}}
+						>
+							<Icon
+								name='star-remove'
+								color={Colors.White}
+								size={30}
+							/>
+						</TouchableHighlight>
+					</View>
+				) : null}
 			</View>
 		</View>
 	);

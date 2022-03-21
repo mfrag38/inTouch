@@ -7,10 +7,15 @@ import {
 	Keyboard,
 	Alert,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import InputForm from '../../../components/InputForm';
 import RoundedButton from '../../../components/RoundedButton';
 import MobileConfirmationSheet from '../MobileConfirmationSheet';
+import {
+	setIsAuthLoading,
+	setConfirmation,
+} from '../../../redux/actions/authActions';
 import mobileNumberUnifier from '../../../utils/mobileNumberUnifier';
 import Colors from '../../../constants/Colors';
 import { styles } from './style';
@@ -20,31 +25,54 @@ const mobileRegex = /^(\+201|01|1)[0125][0-9]{8}$/;
 const SignInScreen = (props) => {
 	const bottomSheetModalRef = useRef(null);
 
-	const [mobileNumber, setMobileNumber] = useState('');
-	const [confirm, setConfirm] = useState(null);
+	const { isAuthLoading } = useSelector((state) => state.Auth);
+	const [mobileNumber, setMobileNumber] = useState('01554222990');
 
-	const onOpen = () => {
+	const dispatch = useDispatch();
+
+	const presentBottomSheet = () => {
 		bottomSheetModalRef.current?.present();
 	};
 
-	const onClose = () => {
+	const dismissBottomSheet = () => {
 		bottomSheetModalRef.current?.dismiss();
 	};
 
-	const handleSignIn = async () => {
+	const handleSignIn = () => {
 		if (mobileNumber.length === 0) {
 			Alert.alert('Error', 'Please enter your mobile number.');
 		} else {
 			if (!mobileNumber.match(mobileRegex)) {
 				Alert.alert('Error', 'Please enter a valid mobile number.');
 			} else {
-				// Loading
-				const confirmation = await auth().signInWithPhoneNumber(
-					mobileNumberUnifier(mobileNumber),
-					false,
-				);
-				setConfirm(confirmation);
-				onOpen();
+				dispatch(setIsAuthLoading(true));
+				auth()
+					.signInWithPhoneNumber(
+						mobileNumberUnifier(mobileNumber),
+						false,
+					)
+					.then((confirmation) => {
+						dispatch(setIsAuthLoading(false));
+						dispatch(setConfirmation(confirmation));
+						console.log('Bottom Sheet Should Be Presented');
+						presentBottomSheet();
+						console.log('Bottom Sheet Have Been Presented');
+					})
+					.catch((error) => {
+						console.warn('Sign In Error:', error);
+						dispatch(setIsAuthLoading(false));
+						Alert.alert(
+							'Error',
+							'Some error happened while signing you in.',
+							[
+								{
+									text: 'Try again',
+									style: 'cancel',
+									onPress: handleSignIn,
+								},
+							],
+						);
+					});
 			}
 		}
 	};
@@ -112,7 +140,10 @@ const SignInScreen = (props) => {
 							height={60}
 							title='Continue'
 							titleColor='#fff'
-							onPress={handleSignIn}
+							isLoading={isAuthLoading}
+							onPress={
+								isAuthLoading === true ? null : handleSignIn
+							}
 							borderRadius={30}
 							backgroundColor={Colors.PrimaryColor}
 						/>
@@ -121,11 +152,9 @@ const SignInScreen = (props) => {
 				</View>
 				<ModalBottomSheet bottomSheetModalRef={bottomSheetModalRef}>
 					<MobileConfirmationSheet
-						onClose={onClose}
-						confirm={confirm}
+						dismiss={dismissBottomSheet}
 						mobileNumber={mobileNumber}
 						navigation={props.navigation}
-						signInHandler={props.route.params.signInHandler}
 					/>
 				</ModalBottomSheet>
 			</View>

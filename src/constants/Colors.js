@@ -1,8 +1,6 @@
 export default {
 	PrimaryColor: '#1D87C9',
 	PrimaryAccentColor: '#79FAC5',
-	SecondaryColor: '#008A5D',
-	SecondaryAccentColor: '#39C08F',
 	AccentColor: '#DFEAE4',
 	BackgroundColor: '#252026',
 	SectionBackgroundColor: '#696969',
