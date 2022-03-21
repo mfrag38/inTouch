@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableHighlight, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, TouchableHighlight, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ContactsList from '../../components/ContactsList';
@@ -11,101 +11,154 @@ import {
 	setIsFavoritesMultiSelect,
 	switchFavoriteContactSelection,
 	clearSelectedFavoriteContacts,
+	searchFavoriteContacts,
+	clearFavoriteSearchResult,
 } from '../../redux/actions/favoriteContactsActions';
 import { groupArrayBy } from '../../utils/arrayOperations';
 import Colors from '../../constants/Colors';
 import { styles } from './style';
 import SelectionList from '../../components/SelectionList';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const FavoriteContactsScreen = (props) => {
 	const {
 		favoriteContacts,
 		isFavoritesMultiSelect,
 		selectedFavoriteContacts,
+		favoritesSearchResult,
 	} = useSelector((state) => state.FavoriteContacts);
+	const [favoriteSearchTerm, setFavoriteSearchTerm] = useState('');
+
+	useEffect(() => {
+		if (favoriteSearchTerm.length !== 0) {
+			dispatch(searchFavoriteContacts(favoriteSearchTerm));
+		} else {
+			dispatch(clearFavoriteSearchResult());
+		}
+	}, [favoriteSearchTerm]);
 
 	const dispatch = useDispatch();
 
 	const {
 		container,
 		headerContainer,
+		headerTopContainer,
 		backButtonContainer,
 		backButton,
 		headerTitleContainer,
 		headerTitleText,
 		headerActionContainer,
 		headerActionButton,
+		headerBottomContainer,
+		headerBottomLeadContainer,
+		headerInputSearchFieldContainer,
+		headerBottomTailContainer,
+		headerBottomTailButton,
 		bodyContainer,
 	} = styles;
 
 	return (
 		<View style={container}>
 			<View style={headerContainer}>
-				<View style={backButtonContainer}>
-					<TouchableHighlight
-						style={backButton}
-						underlayColor={Colors.DimGrayOpacity}
-						onPress={
-							isFavoritesMultiSelect
-								? () => {
-										dispatch(
-											clearSelectedFavoriteContacts(),
-										);
-										dispatch(
-											setIsFavoritesMultiSelect(false),
-										);
-								  }
-								: () => props.navigation.goBack()
-						}
-						// onPress={() => props.navigation.goBack()}
-					>
-						<Icon
-							name={
-								isFavoritesMultiSelect
-									? 'close'
-									: 'chevron-left'
-							}
-							size={24}
-							color={Colors.PrimaryColor}
-						/>
-					</TouchableHighlight>
-				</View>
-				<View style={headerTitleContainer}>
-					<Text style={headerTitleText}>Favorite Contacts</Text>
-					<Text
-						style={{
-							color: Colors.White,
-						}}
-					>
-						{isFavoritesMultiSelect
-							? `${selectedFavoriteContacts.length} / `
-							: null}
-						{favoriteContacts.length}
-					</Text>
-				</View>
-				{isFavoritesMultiSelect ? (
-					<View style={headerActionContainer}>
+				<View style={headerTopContainer}>
+					<View style={backButtonContainer}>
 						<TouchableHighlight
-							style={headerActionButton}
+							style={backButton}
 							underlayColor={Colors.DimGrayOpacity}
-							onPress={() => {
-								dispatch(setIsFavoritesMultiSelect(false));
-								dispatch(
-									removeFromFavoriteContacts(
-										selectedFavoriteContacts,
-									),
-								);
-								dispatch(clearSelectedFavoriteContacts());
-							}}
+							onPress={
+								isFavoritesMultiSelect
+									? () => {
+											dispatch(
+												clearSelectedFavoriteContacts(),
+											);
+											dispatch(
+												setIsFavoritesMultiSelect(
+													false,
+												),
+											);
+									  }
+									: () => props.navigation.goBack()
+							}
 						>
 							<Icon
-								name='star-minus'
-								size={30}
+								name={
+									isFavoritesMultiSelect
+										? 'close'
+										: 'chevron-left'
+								}
+								size={24}
 								color={Colors.PrimaryColor}
 							/>
 						</TouchableHighlight>
 					</View>
-				) : null}
+					<View style={headerTitleContainer}>
+						<Text style={headerTitleText}>Favorite Contacts</Text>
+						<Text
+							style={{
+								color: Colors.White,
+							}}
+						>
+							{isFavoritesMultiSelect
+								? `${selectedFavoriteContacts.length} / `
+								: null}
+							{favoriteContacts.length}
+						</Text>
+					</View>
+					{isFavoritesMultiSelect ? (
+						<View style={headerActionContainer}>
+							<TouchableHighlight
+								style={headerActionButton}
+								underlayColor={Colors.DimGrayOpacity}
+								onPress={() => {
+									dispatch(setIsFavoritesMultiSelect(false));
+									dispatch(
+										removeFromFavoriteContacts(
+											selectedFavoriteContacts,
+										),
+									);
+									dispatch(clearSelectedFavoriteContacts());
+								}}
+							>
+								<Icon
+									name='star-minus'
+									size={30}
+									color={Colors.PrimaryColor}
+								/>
+							</TouchableHighlight>
+						</View>
+					) : null}
+				</View>
+				<View style={headerBottomContainer}>
+					<View style={headerBottomLeadContainer}>
+						<Icon name='magnify' size={24} color={Colors.Grey} />
+					</View>
+					<View style={headerInputSearchFieldContainer}>
+						<TextInput
+							numberOfLines={1}
+							placeholder='Search'
+							placeholderTextColor={Colors.Grey}
+							style={{
+								color: Colors.White,
+							}}
+							onChangeText={(text) => setFavoriteSearchTerm(text)}
+							value={favoriteSearchTerm}
+						/>
+					</View>
+					{favoriteSearchTerm.length !== 0 ? (
+						<View style={headerBottomTailContainer}>
+							<TouchableOpacity
+								style={headerBottomTailButton}
+								onPress={() => setFavoriteSearchTerm('')}
+							>
+								<Icon
+									name='close'
+									size={24}
+									color={Colors.Grey}
+								/>
+							</TouchableOpacity>
+						</View>
+					) : null}
+				</View>
 			</View>
 			{isFavoritesMultiSelect && selectedFavoriteContacts.length != 0 ? (
 				<View
@@ -123,15 +176,21 @@ const FavoriteContactsScreen = (props) => {
 			) : null}
 			<View style={bodyContainer}>
 				<ContactsList
-					contacts={groupArrayBy(favoriteContacts, 'displayName')}
+					contacts={
+						favoriteSearchTerm.length === 0
+							? groupArrayBy(favoriteContacts, 'displayName')
+							: groupArrayBy(favoritesSearchResult, 'displayName')
+					}
 					isContactsMultiSelect={isFavoritesMultiSelect}
 					selectedContacts={selectedFavoriteContacts}
 					onItemPress={(item) => {
 						if (isFavoritesMultiSelect === true) {
 							dispatch(switchFavoriteContactSelection(item));
 						} else {
-							console.log('Multi Select Is Off');
-							// Should Navigate To Contact Details Screen
+							Alert.alert(
+								'Info',
+								'Should go to contact details screen but it is not implemented.',
+							);
 						}
 					}}
 					onItemLongPress={(item) => {

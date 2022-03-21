@@ -5,6 +5,8 @@ import {
 	SELECT_CONTACT,
 	DESELECT_CONTACT,
 	CLEAR_SELECTED_CONTACTS,
+	ADD_TO_SEARCH_RESULT,
+	CLEAR_SEARCH_RESULT,
 } from '../types';
 
 const initState = {
@@ -12,6 +14,7 @@ const initState = {
 	isContactsLoading: false,
 	isContactsMultiSelect: false,
 	selectedContacts: [],
+	searchResult: [],
 };
 
 export default (state = initState, action) => {
@@ -60,6 +63,16 @@ export default (state = initState, action) => {
 			return {
 				...state,
 				selectedContacts: [],
+			};
+		case ADD_TO_SEARCH_RESULT:
+			return {
+				...state,
+				searchResult: [...state.searchResult, ...action.payload],
+			};
+		case CLEAR_SEARCH_RESULT:
+			return {
+				...state,
+				searchResult: [],
 			};
 		default:
 			return state;

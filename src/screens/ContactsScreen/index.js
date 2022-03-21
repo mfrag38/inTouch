@@ -1,9 +1,10 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 import {
 	View,
 	Text,
 	TextInput,
 	TouchableHighlight,
+	TouchableOpacity,
 	PermissionsAndroid,
 	Alert,
 	Linking,
@@ -24,6 +25,8 @@ import {
 	clearSelectedContacts,
 	switchContactSelection,
 	deselectContact,
+	searchContacts,
+	clearSearchResult,
 } from '../../redux/actions/contactsActions';
 import { addToFavoriteContacts } from '../../redux/actions/favoriteContactsActions';
 import { groupArrayBy } from '../../utils/arrayOperations';
@@ -36,8 +39,10 @@ const ContactsScreen = (props) => {
 		isContactsLoading,
 		isContactsMultiSelect,
 		selectedContacts,
+		searchResult,
 	} = useSelector((state) => state.Contacts);
 	const { favoriteContacts } = useSelector((state) => state.FavoriteContacts);
+	const [searchTerm, setSearchTerm] = useState('');
 
 	const listRef = useRef();
 
@@ -46,6 +51,15 @@ const ContactsScreen = (props) => {
 	useEffect(() => {
 		contactsInitializer();
 	}, []);
+
+	useEffect(() => {
+		if (searchTerm.length !== 0) {
+			dispatch(searchContacts(searchTerm));
+		} else {
+			dispatch(clearSearchResult());
+			contactsInitializer();
+		}
+	}, [searchTerm]);
 
 	const contactsInitializer = () => {
 		dispatch(setIsContactsLoading(true));
@@ -107,36 +121,6 @@ const ContactsScreen = (props) => {
 				});
 		} else {
 			dispatch(setIsContactsLoading(false));
-		}
-	};
-
-	const findAll = (arr1, arr2) => {
-		const temp = [];
-		arr1.forEach((el1) => {
-			if (arr2.includes(el1)) {
-				Alert.alert(
-					'Error',
-					`${el1.displayName} already in favorites, Remove it from selection`,
-					[
-						{
-							text: 'Remove',
-							style: 'destructive',
-							onPress: () => dispatch(deselectContact(el1)),
-						},
-						{
-							text: 'Cancel',
-							style: 'cancel',
-						},
-					],
-				);
-			} else {
-				temp.push(el1);
-			}
-		});
-		if (temp.length === arr2.length) {
-			return true;
-		} else {
-			return false;
 		}
 	};
 
@@ -247,8 +231,10 @@ const ContactsScreen = (props) => {
 		headerTitleText,
 		headerSubTitleText,
 		headerBottomContainer,
-		headerBottomIconContainer,
+		headerBottomLeadContainer,
 		headerInputSearchFieldContainer,
+		headerBottomTailContainer,
+		headerBottomTailButton,
 		selectionAreaContainer,
 		bodyContainer,
 	} = styles;
@@ -295,13 +281,7 @@ const ContactsScreen = (props) => {
 							underlayColor={Colors.DimGrayOpacity}
 							onPress={
 								isContactsMultiSelect
-									? () => {
-											handleAddToFavorites();
-											console.log(
-												'The Selected Contacts:',
-												selectedContacts,
-											);
-									  }
+									? handleAddToFavorites
 									: () =>
 											props.navigation.navigate(
 												'FavoriteContacts',
@@ -319,7 +299,7 @@ const ContactsScreen = (props) => {
 					</View>
 				</View>
 				<View style={headerBottomContainer}>
-					<View style={headerBottomIconContainer}>
+					<View style={headerBottomLeadContainer}>
 						<Icon name='magnify' size={24} color={Colors.Grey} />
 					</View>
 					<View style={headerInputSearchFieldContainer}>
@@ -327,8 +307,27 @@ const ContactsScreen = (props) => {
 							numberOfLines={1}
 							placeholder='Search'
 							placeholderTextColor={Colors.Grey}
+							style={{
+								color: Colors.White,
+							}}
+							onChangeText={(text) => setSearchTerm(text)}
+							value={searchTerm}
 						/>
 					</View>
+					{searchTerm.length !== 0 ? (
+						<View style={headerBottomTailContainer}>
+							<TouchableOpacity
+								style={headerBottomTailButton}
+								onPress={() => setSearchTerm('')}
+							>
+								<Icon
+									name='close'
+									size={24}
+									color={Colors.Grey}
+								/>
+							</TouchableOpacity>
+						</View>
+					) : null}
 				</View>
 			</View>
 			{isContactsMultiSelect && selectedContacts.length !== 0 ? (
@@ -348,9 +347,11 @@ const ContactsScreen = (props) => {
 					<ContactsList
 						listRef={listRef}
 						contacts={
-							contacts
-								? groupArrayBy(contacts, 'displayName')
-								: []
+							searchTerm.length === 0
+								? contacts
+									? groupArrayBy(contacts, 'displayName')
+									: []
+								: groupArrayBy(searchResult, 'displayName')
 						}
 						isContactsMultiSelect={isContactsMultiSelect}
 						selectedContacts={selectedContacts}

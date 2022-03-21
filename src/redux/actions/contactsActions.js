@@ -5,6 +5,8 @@ import {
 	SELECT_CONTACT,
 	DESELECT_CONTACT,
 	CLEAR_SELECTED_CONTACTS,
+	ADD_TO_SEARCH_RESULT,
+	CLEAR_SEARCH_RESULT,
 } from '../types';
 
 export const fetchContacts = (contacts) => ({
@@ -55,3 +57,16 @@ export const switchContactSelection = (contact) => {
 export const clearSelectedContacts = () => ({
 	type: CLEAR_SELECTED_CONTACTS,
 });
+
+export const searchContacts = (searchTerm) => {
+	return (dispatch, getState) => {
+		dispatch({ type: CLEAR_SEARCH_RESULT });
+		const { contacts } = getState().Contacts;
+		let tempRes = contacts.filter((contact) =>
+			contact.displayName.startsWith(searchTerm),
+		);
+		dispatch({ type: ADD_TO_SEARCH_RESULT, payload: tempRes });
+	};
+};
+
+export const clearSearchResult = () => ({ type: CLEAR_SEARCH_RESULT });

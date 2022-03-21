@@ -36,10 +36,6 @@ export const styles = StyleSheet.create({
 		borderRadius: 56,
 		overflow: 'hidden',
 	},
-	headerButtonText: {
-		fontSize: 18,
-		color: Colors.SecondaryColor,
-	},
 	headerTitlesContainer: {
 		height: '100%',
 		justifyContent: 'space-evenly',
@@ -63,7 +59,7 @@ export const styles = StyleSheet.create({
 		overflow: 'hidden',
 		backgroundColor: Colors.SearchBarBackgroundColor,
 	},
-	headerBottomIconContainer: {
+	headerBottomLeadContainer: {
 		width: 36,
 		height: 36,
 		justifyContent: 'center',
@@ -71,6 +67,18 @@ export const styles = StyleSheet.create({
 	},
 	headerInputSearchFieldContainer: {
 		flex: 1,
+	},
+	headerBottomTailContainer: {
+		width: 36,
+		height: 36,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	headerBottomTailButton: {
+		width: '100%',
+		height: '100%',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	selectionAreaContainer: {
 		width: '100%',

@@ -54,7 +54,9 @@ const SignInScreen = (props) => {
 					.then((confirmation) => {
 						dispatch(setIsAuthLoading(false));
 						dispatch(setConfirmation(confirmation));
+						console.log('Bottom Sheet Should Be Presented');
 						presentBottomSheet();
+						console.log('Bottom Sheet Have Been Presented');
 					})
 					.catch((error) => {
 						console.warn('Sign In Error:', error);

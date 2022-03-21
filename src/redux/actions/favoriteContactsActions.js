@@ -7,6 +7,8 @@ import {
 	SELECT_FAVORITE_CONTACT,
 	DESELECT_FAVORITE_CONTACT,
 	CLEAR_SELECTED_FAVORITE_CONTACTS,
+	ADD_TO_FAVORITE_SEARCH_RESULT,
+	CLEAR_FAVORITE_SEARCH_RESULT,
 } from '../types';
 
 export const addToFavoriteContacts = (newFavoriteContacts) => {
@@ -148,3 +150,23 @@ export const switchFavoriteContactSelection = (contact) => {
 export const clearSelectedFavoriteContacts = () => ({
 	type: CLEAR_SELECTED_FAVORITE_CONTACTS,
 });
+
+export const searchFavoriteContacts = (searchTerm) => {
+	return (dispatch, getState) => {
+		dispatch({ type: CLEAR_FAVORITE_SEARCH_RESULT });
+		const { favoriteContacts } = getState().FavoriteContacts;
+		let tempRes = favoriteContacts.filter((favoriteContact) =>
+			favoriteContact.displayName.startsWith(searchTerm),
+		);
+		dispatch({
+			type: ADD_TO_FAVORITE_SEARCH_RESULT,
+			payload: tempRes,
+		});
+	};
+};
+
+export const clearFavoriteSearchResult = () => {
+	return {
+		type: CLEAR_FAVORITE_SEARCH_RESULT,
+	};
+};

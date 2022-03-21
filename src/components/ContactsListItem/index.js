@@ -46,7 +46,7 @@ const ContactsListItem = (props) => {
 							size={24}
 							color={
 								isItemSelected
-									? Colors.SecondaryColor
+									? Colors.PrimaryColor
 									: Colors.Gray
 							}
 						/>

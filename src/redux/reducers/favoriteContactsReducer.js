@@ -6,12 +6,15 @@ import {
 	SELECT_FAVORITE_CONTACT,
 	DESELECT_FAVORITE_CONTACT,
 	CLEAR_SELECTED_FAVORITE_CONTACTS,
+	ADD_TO_FAVORITE_SEARCH_RESULT,
+	CLEAR_FAVORITE_SEARCH_RESULT,
 } from '../types';
 
 const initState = {
 	favoriteContacts: [],
 	isFavoritesMultiSelect: false,
 	selectedFavoriteContacts: [],
+	favoritesSearchResult: [],
 };
 
 export default (state = initState, action) => {
@@ -80,6 +83,19 @@ export default (state = initState, action) => {
 			return {
 				...state,
 				selectedFavoriteContacts: [],
+			};
+		case ADD_TO_FAVORITE_SEARCH_RESULT:
+			return {
+				...state,
+				favoritesSearchResult: [
+					...state.favoritesSearchResult,
+					...action.payload,
+				],
+			};
+		case CLEAR_FAVORITE_SEARCH_RESULT:
+			return {
+				...state,
+				favoritesSearchResult: [],
 			};
 		default:
 			return state;
