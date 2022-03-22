@@ -1,4 +1,3 @@
-import { Alert } from 'react-native';
 import {
 	ADD_TO_FAVORITE_CONTACTS,
 	REMOVE_FROM_FAVORITE_CONTACTS,
@@ -19,76 +18,6 @@ export const addToFavoriteContacts = (newFavoriteContacts) => {
 		});
 	};
 };
-
-/* export const addToFavoriteContacts = (newFavoriteContacts) => {
-	console.log('Action Fired');
-	return (dispatch, getState) => {
-		const { favoriteContacts } = getState().FavoriteContacts;
-		if (Array.isArray(newFavoriteContacts)) {
-			console.log('We Have An Array');
-			var counter = 0;
-			newFavoriteContacts.forEach((newFavoriteContact) => {
-				if (!favoriteContacts.includes(newFavoriteContact)) {
-					console.log(
-						'Selected Array Contact Is Not In Favorite Contacts',
-					);
-					counter++;
-				} else {
-					console.log(
-						'Selected Array Contact Already In Favorite Contacts',
-					);
-					Alert.alert(
-						'Error',
-						`${newFavoriteContact.displayName} already in favorites, Remove it from selection`,
-						{
-							text: 'Remove',
-							style: 'destructive',
-							onPress: () =>
-								dispatch(deselectFavoriteContact(el1)),
-						},
-						{
-							text: 'Cancel',
-							style: 'cancel',
-						},
-					);
-				}
-			});
-			if (counter.length === newFavoriteContacts.length) {
-				console.log(
-					'All Selected Contacts Was Not In Favorite Contacts',
-				);
-				dispatch({
-					type: ADD_TO_FAVORITE_CONTACTS,
-					payload: newFavoriteContacts,
-				});
-			}
-		} else {
-			console.log('We Have A Single Contact');
-			if (!favoriteContacts.includes(newFavoriteContacts)) {
-				console.log('Selected Contact Is No In Favorite Contacts');
-				dispatch({
-					type: ADD_TO_FAVORITE_CONTACTS,
-					payload: [newFavoriteContacts],
-				});
-			} else {
-				console.log('Selected Contact Already In Favorite Contacts');
-				Alert.alert(
-					'Error',
-					`${newFavoriteContacts.displayName} already in favorites, Remove it from selection`,
-					{
-						text: 'Remove',
-						style: 'destructive',
-						onPress: () => dispatch(deselectFavoriteContact(el1)),
-					},
-					{
-						text: 'Cancel',
-						style: 'cancel',
-					},
-				);
-			}
-		}
-	};
-}; */
 
 export const removeFromFavoriteContacts = (tempFavoriteContacts) => {
 	return (dispatch) => {

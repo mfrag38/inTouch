@@ -26,7 +26,7 @@ const SignInScreen = (props) => {
 	const bottomSheetModalRef = useRef(null);
 
 	const { isAuthLoading } = useSelector((state) => state.Auth);
-	const [mobileNumber, setMobileNumber] = useState('01554222990');
+	const [mobileNumber, setMobileNumber] = useState('');
 
 	const dispatch = useDispatch();
 
@@ -54,9 +54,7 @@ const SignInScreen = (props) => {
 					.then((confirmation) => {
 						dispatch(setIsAuthLoading(false));
 						dispatch(setConfirmation(confirmation));
-						console.log('Bottom Sheet Should Be Presented');
 						presentBottomSheet();
-						console.log('Bottom Sheet Have Been Presented');
 					})
 					.catch((error) => {
 						console.warn('Sign In Error:', error);
@@ -65,6 +63,10 @@ const SignInScreen = (props) => {
 							'Error',
 							'Some error happened while signing you in.',
 							[
+								{
+									text: 'Cancel',
+									style: 'cancel',
+								},
 								{
 									text: 'Try again',
 									style: 'cancel',
