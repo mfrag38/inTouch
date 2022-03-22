@@ -11,7 +11,7 @@ const initState = {
 	isConfirmLoading: false,
 	isAddLoading: false,
 	confirmation: null,
-	isAuthenticated: true,
+	isAuthenticated: false,
 };
 
 export default (state = initState, action) => {

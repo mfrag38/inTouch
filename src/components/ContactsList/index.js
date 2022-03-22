@@ -1,12 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
-import { SectionList, View, Text } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { SectionList } from 'react-native';
 import ContactsListItem from '../ContactsListItem';
 import ContactsListSectionHeader from '../ContactsListSectionHeader';
 import ContactsListItemSeparator from '../ContactsListItemSeparator';
-import RoundedButton from '../RoundedButton';
 import { styles } from './style';
-import Colors from '../../constants/Colors';
 
 const ContactsList = (props) => {
 	const {
@@ -50,10 +47,6 @@ const ContactsList = (props) => {
 			stickySectionHeadersEnabled={true}
 			renderSectionHeader={renderSectionHeader}
 			ItemSeparatorComponent={ItemSeparatorComponent}
-			/* contentContainerStyle={[
-				contentContainerStyle,
-				contacts.length ? null : { justifyContent: 'center' },
-			]} */
 			contentContainerStyle={contentContainerStyle}
 			scrollTo
 			maxToRenderPerBatch={5}

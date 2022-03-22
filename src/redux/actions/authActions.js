@@ -30,9 +30,3 @@ export const setIsAuthenticated = (isAuthenticated) => ({
 	type: SET_IS_AUTHENTICATED,
 	payload: isAuthenticated,
 });
-
-/* export const signInWithPhoneNumber = (phoneNumber) => {
-	return dispatch => {
-		
-	}
-} */

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
 	View,
 	Text,
@@ -28,7 +28,12 @@ import {
 	searchContacts,
 	clearSearchResult,
 } from '../../redux/actions/contactsActions';
-import { addToFavoriteContacts } from '../../redux/actions/favoriteContactsActions';
+import {
+	addToFavoriteContacts,
+	clearFavoriteSearchResult,
+	clearSelectedFavoriteContacts,
+	removeAllFavoriteContacts,
+} from '../../redux/actions/favoriteContactsActions';
 import { groupArrayBy } from '../../utils/arrayOperations';
 import Colors from '../../constants/Colors';
 import { styles } from './style';
@@ -129,6 +134,11 @@ const ContactsScreen = (props) => {
 			.signOut()
 			.then(() => {
 				dispatch(setIsAuthenticated(false));
+				dispatch(clearSelectedContacts());
+				dispatch(clearSearchResult());
+				dispatch(removeAllFavoriteContacts());
+				dispatch(clearSelectedFavoriteContacts());
+				dispatch(clearFavoriteSearchResult());
 			})
 			.catch((error) => {
 				console.warn('Sign Out Error:', error);
@@ -138,7 +148,14 @@ const ContactsScreen = (props) => {
 					[
 						{
 							text: 'Sign Out Anyway',
-							onPress: () => dispatch(setIsAuthenticated(false)),
+							onPress: () => {
+								dispatch(setIsAuthenticated(false));
+								dispatch(clearSelectedContacts());
+								dispatch(clearSearchResult());
+								dispatch(removeAllFavoriteContacts());
+								dispatch(clearSelectedFavoriteContacts());
+								dispatch(clearFavoriteSearchResult());
+							},
 						},
 						{
 							text: 'Try Again!',
